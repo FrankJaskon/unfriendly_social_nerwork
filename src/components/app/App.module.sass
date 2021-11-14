@@ -21,3 +21,19 @@
     width: 100vmax
     height: 100vmin
     text-align: center
+
+@media (max-width: 768px)
+    .app
+        width: 100vmin
+        height: 100vmax
+        margin: 0
+        overflow: hidden
+        .wrapper
+            display: grid
+            grid: 50px auto / 1fr 5fr;
+            gap: .5rem 0
+            padding: 0
+            .app-wrapper-content
+                // height: 100%
+                // overflow: hidden
+                // color: #47525E

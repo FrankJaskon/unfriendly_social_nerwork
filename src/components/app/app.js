@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {HashRouter, Route} from 'react-router-dom';
 import AsideContainer from '../aside';
 import HeaderContainer from '../header';
 import {initializeApp} from '../../redux/app-reducer';
@@ -73,11 +73,11 @@ const AppContainer = compose(
 
 const UnfriendlySocialNetworkApp = ({store}) => {
     return <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer />
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>
 }
 

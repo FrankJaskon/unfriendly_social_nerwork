@@ -6,3 +6,25 @@
     overflow: hidden
     background: #25bdd8
     color: #fff
+    z-index: 10
+.hamburgerMenuIcon
+    display: none
+@media (max-width: 767px)
+    .additionalWrapper
+        position: relative
+        .aside
+            display: grid
+            grid-template-columns: 55px 1fr
+            position: absolute
+            min-width: 55px
+            width: 55px
+            height: calc(100vmax - 50px)
+            padding: 1rem 0
+            transition: all .5s
+            .hamburgerMenuIcon
+                display: block
+                margin: 0 auto
+            .navbarFriendsWrapper
+                height: 100%
+        .onOpenStyle
+            width: 200px

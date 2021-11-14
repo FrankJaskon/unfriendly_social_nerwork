@@ -8,13 +8,19 @@ const Header = ({header: {login, isAuth}}) => {
     return (
         <header className={s.header}>
             <div className={s.headerTitleWrapper}>
-                <h1 className={s.headerMainTitle}><div>Hello,
-                    <NavLink to={'/profile'}>
-                        <span className={s.userName}> {login}.</span>
-                    </NavLink> {isAuth ? `This is the place where you aren't expected.`
-                        : `Welcome to unfriendly social network` }</div>
-                        <LoginButton wrapClassName={s.wrapperStyle} btnClassName={s.btnStyle} />
+                <h1 className={s.headerMainTitle}>
+                    <div>Hello,
+                        <NavLink to={'/profile'}>
+                            <span className={s.userName}> {login}.</span>
+                        </NavLink> {
+                        isAuth
+                            ? <span className={s.additionalTitleContent}>This is the place where you aren't expected.</span>
+                            : <span className={s.additionalTitleContent}>Welcome to unfriendly social network</span>
+                        }
+                    </div>
+                            <LoginButton wrapClassName={s.wrapperStyle} btnClassName={s.btnStyle} />
                 </h1>
+
             </div>
         </header>
     )

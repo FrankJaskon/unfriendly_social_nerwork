@@ -13,6 +13,7 @@
             margin: 0
             padding: 0 1rem
             text-align: center
+            font-size: 2rem
             color: #fff
             a
                 color: inherit
@@ -20,6 +21,7 @@
                 text-decoration: none
                 font-size: 1rem
 .userName
+    font-size: 2rem
     color: #c71717
 .wrapperStyle
 .btnStyle
@@ -28,12 +30,24 @@
     &:hover
         background: none
 
-@media screen and (min-width: 800px)
-    .headerMainTitle, .userName
-        font-size: 2rem
+// @media screen and (min-width: 800px)
+//     .headerMainTitle, .userName
+//         font-size: 2rem
 
 @media screen and (max-width: 800px)
-    .headerMainTitle, .userName
+    .headerMainTitle
         font-size: 1.5rem
+
+@media (max-width: 768px)
+    .additionalTitleContent
+        display: none
+    .header
+        display: block
+        width: 100vmin
+        height: 50px
+        line-height: 50px
+        margin: 0
+        .headerTitleWrapper
+            .headerMainTitle
 
 
