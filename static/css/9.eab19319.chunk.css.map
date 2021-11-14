@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/music/Music.module.sass"],"names":[],"mappings":"AAAA,wBACI,2BAAmC,CACnC,eAAgB,CAChB,iBAAkB","file":"9.eab19319.chunk.css","sourcesContent":[".musicPage {\n    height: calc(100vmin - 60px - 10px);\n    overflow-y: auto;\n    position: relative; }\n"]}
