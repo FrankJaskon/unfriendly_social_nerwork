@@ -2,11 +2,13 @@ import React from 'react';
 import {compose} from 'redux';
 import HOC from '../common/hoc';
 
-// import s from './Music.module.sass';
+import s from './Music.module.sass';
 
 const Music = (props) => {
     return (
-        <h1>Music</h1>
+        <div className={s.musicPage}>
+            <h1>Music</h1>
+        </div>
     )
 }
 

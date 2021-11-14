@@ -11,19 +11,19 @@ import HOC from '../common/hoc';
 import s from './App.module.sass';
 
 const LoginContainer = HOC.wrapComponentSuspense(
-    React.lazy(() => import('../login')), <Preloader preloaderClass={s.preloader} />);
+    React.lazy(() => import('../login')), <Preloader />);
 const ProfileContainer = HOC.wrapComponentSuspense(
-    React.lazy(() => import('../profile')), <Preloader preloaderClass={s.preloader} />);
+    React.lazy(() => import('../profile')), <Preloader />);
 const DialogsContainer = HOC.wrapComponentSuspense(
-    React.lazy(() => import('../dialogs')), <Preloader preloaderClass={s.preloader} />);
+    React.lazy(() => import('../dialogs')), <Preloader />);
 const UsersContainer = HOC.wrapComponentSuspense(
-    React.lazy(() => import('../users')), <Preloader preloaderClass={s.preloader} />);
+    React.lazy(() => import('../users')), <Preloader />);
 const SettingsContainer = HOC.wrapComponentSuspense(
-    React.lazy(() => import('../settings')), <Preloader preloaderClass={s.preloader} />);
+    React.lazy(() => import('../settings')), <Preloader />);
 const News = HOC.wrapComponentSuspense(
-    React.lazy(() => import('../news')), <Preloader preloaderClass={s.preloader} />);
+    React.lazy(() => import('../news')), <Preloader />);
 const Music = HOC.wrapComponentSuspense(
-    React.lazy(() => import('../music')), <Preloader preloaderClass={s.preloader} />);
+    React.lazy(() => import('../music')), <Preloader />);
 
 class App extends React.Component {
     componentDidMount() {
@@ -39,7 +39,8 @@ class App extends React.Component {
                     <AsideContainer />
                     <div className={s['app-wrapper-content']}>
                         <Route
-                            path='/login/'
+                            exact
+                            path={["/login", "/"]}
                             render={LoginContainer} />
                         <Route
                             path='/profile/:userId?'

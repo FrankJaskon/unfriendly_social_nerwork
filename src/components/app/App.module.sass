@@ -24,16 +24,14 @@
 
 @media (max-width: 768px)
     .app
-        width: 100vmin
+        width: 100%
         height: 100vmax
         margin: 0
+        padding: 0
         overflow: hidden
         .wrapper
             display: grid
-            grid: 50px auto / 1fr 5fr;
+            grid: 50px auto / minmax(69px, auto) 5fr;
             gap: .5rem 0
             padding: 0
             .app-wrapper-content
-                // height: 100%
-                // overflow: hidden
-                // color: #47525E

@@ -6,7 +6,7 @@ import LoginButton from '../common/buttons/loginBtn';
 
 const Settings = ({isAuth, photoIsLoading}) => {
     return (
-        <div>
+        <div className={s.settingsPage}>
             <h3 className={s.title}>Settings</h3>
             {isAuth ? <UploadForm btnName='Upload profile photo' photoIsLoading={photoIsLoading} /> : ''}
             <div className={s.wrapperLogin}>

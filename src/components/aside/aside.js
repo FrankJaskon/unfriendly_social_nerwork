@@ -13,15 +13,22 @@ const Aside = ({navbar, friends, isAuth}) => {
       return isMobile ? children : null
     }
 
+    const unitedStyles = `${s.aside} ${s.onOpenStyle}`;
+
     const [isOpen, setOpen] = useState(false)
 
     const [asideStyle, setAsideStyle] = useState(s.aside)
 
     const onOpenMenu = () => {
-        setAsideStyle(`${s.aside} ${s.onOpenStyle}`);
+        setAsideStyle(unitedStyles);
     }
 
     const onCloseMenu = () => {
+        setAsideStyle(s.aside);
+    }
+
+    const onClickMenuItem = () => {
+        setOpen(false);
         setAsideStyle(s.aside);
     }
 
@@ -35,7 +42,7 @@ const Aside = ({navbar, friends, isAuth}) => {
                     </div>
                 </Mobile>
                 <div className={s.navbarFriendsWrapper} >
-                    <Navbar navbar={navbar} />
+                    <Navbar navbar={navbar} onClickMenuItem={onClickMenuItem} />
                     {isAuth ? <Friends friendsData={friends} /> : ''}</div>
             </aside>
         </div>

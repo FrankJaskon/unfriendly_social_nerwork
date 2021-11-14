@@ -25,25 +25,29 @@ const Profile = ({profile: {postsData, newPostBody, placeholderText,
     }, [pageId, showUserPage]);
 
     if (!pageId) return <Redirect to='/login' />;
-    if (!isLoaded) return <Preloader />
     return  <div className={s.profile__wrapper}>
-        <ProfileImg />
-        <User
-            aboutMe={aboutMe}
-            contacts={contacts}
-            lookingForAJob={lookingForAJob}
-            lookingForAJobDescription={lookingForAJobDescription}
-            fullName={fullName}
-            photo={large}
-            userId={userId}
-            isMyPage={isMyPage} />
-        <MyPosts
-            postsData={postsData}
-            newPostBody={newPostBody}
-            placeholderText={placeholderText}
-            addPost={addPost}
-            isAuth={isAuth}
-            isMyPage={isMyPage} />
+        {!isLoaded
+            ? <Preloader />
+            : <>
+            <ProfileImg />
+            <User
+                aboutMe={aboutMe}
+                contacts={contacts}
+                lookingForAJob={lookingForAJob}
+                lookingForAJobDescription={lookingForAJobDescription}
+                fullName={fullName}
+                photo={large}
+                userId={userId}
+                isMyPage={isMyPage} />
+            <MyPosts
+                postsData={postsData}
+                newPostBody={newPostBody}
+                placeholderText={placeholderText}
+                addPost={addPost}
+                isAuth={isAuth}
+                isMyPage={isMyPage} />
+            </>
+        }
     </div>
 }
 
