@@ -1,0 +1,25 @@
+.message
+    display: flex
+    align-items: center
+    width: 100%
+    position: relative
+    .user
+        .user__img
+            width: 60px
+            height: 60px
+            background: #000
+            border-radius: 50%
+        .user__name
+            width: 100%
+            margin: 0 0 1rem 0
+            text-align: center
+    .message__text
+        max-width: 300px
+        margin: 0 2rem
+        padding: .5rem 1rem
+        align-self: flex-start
+        border: #888 2px solid
+        border-radius: 6px
+    &:nth-child(2n)
+        justify-content: end
+        flex-direction: row-reverse

@@ -1,0 +1,38 @@
+.create-post
+    padding: 0 .5rem 1rem 1rem
+    .title
+        padding: .65rem
+    .create-post__input_wrap
+        height: 60px
+        position: relative
+        border-radius: .5rem
+        .create-post__input
+            width: 100%
+            height: 100%
+            padding-left: 1rem
+            background: #d7faff
+            outline: none
+            border: none
+            border-radius: .5rem
+            &:focus
+               background: #e8f0fe
+            &:focus::placeholder
+                opacity: 0
+            &:disabled
+                background: #e1f1f3
+        ::placeholder
+            position: absolute
+            top: 10px
+            left: 10px
+            font-size: 1rem
+            transition: opacity 0.3s;
+.error
+    margin: 1rem 0 0 1rem
+    color: #ff0000
+.btnStyle
+    width: 60px
+    height: 30px
+.wrapperStyle
+    flex-direction: row
+    justify-content: end
+    padding: .5rem 1rem

@@ -1,0 +1,37 @@
+.wrapper
+    position: absolute
+    top: calc(100vmin - 60px - 60px - 10px)
+    left: 0
+    display: flex
+    width: 100%
+    height: 60px
+    padding: .5rem 1rem
+    background: #c4ebf7
+    border-radius: 5px
+    .input__wrapper
+        flex: 6
+        margin-right: 1rem
+        border-radius: .5rem
+        .input
+            width: 100%
+            height: 100%
+            resize: none
+            padding: .5rem 1rem
+            font: inherit
+            color: inherit
+            border-radius: 5px
+            border: none
+            outline: none
+            &:focus::placeholder
+                opacity: 0
+        ::placeholder
+            position: absolute
+            top: 10px
+            left: 10px
+            font-size: 1rem
+            transition: opacity 0.3s
+.error
+    position: absolute
+    top: -1.5rem
+    left: 1rem
+    color: #ff0000
