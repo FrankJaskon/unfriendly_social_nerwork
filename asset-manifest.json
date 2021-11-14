@@ -2,7 +2,7 @@
   "files": {
     "static/js/0.da469240.chunk.js": "/unfriendly_social_nerwork/static/js/0.da469240.chunk.js",
     "static/js/0.da469240.chunk.js.map": "/unfriendly_social_nerwork/static/js/0.da469240.chunk.js.map",
-    "main.css": "/unfriendly_social_nerwork/static/css/main.d2e16851.chunk.css",
+    "main.css": "/unfriendly_social_nerwork/static/css/main.a6aef676.chunk.css",
     "main.js": "/unfriendly_social_nerwork/static/js/main.04312494.chunk.js",
     "main.js.map": "/unfriendly_social_nerwork/static/js/main.04312494.chunk.js.map",
     "runtime-main.js": "/unfriendly_social_nerwork/static/js/runtime-main.60bf2c02.js",
@@ -34,7 +34,7 @@
     "static/css/6.baccd4f8.chunk.css.map": "/unfriendly_social_nerwork/static/css/6.baccd4f8.chunk.css.map",
     "static/css/7.3408fb39.chunk.css.map": "/unfriendly_social_nerwork/static/css/7.3408fb39.chunk.css.map",
     "static/css/8.039dcae4.chunk.css.map": "/unfriendly_social_nerwork/static/css/8.039dcae4.chunk.css.map",
-    "static/css/main.d2e16851.chunk.css.map": "/unfriendly_social_nerwork/static/css/main.d2e16851.chunk.css.map",
+    "static/css/main.a6aef676.chunk.css.map": "/unfriendly_social_nerwork/static/css/main.a6aef676.chunk.css.map",
     "static/js/3.4fb155cd.chunk.js.LICENSE.txt": "/unfriendly_social_nerwork/static/js/3.4fb155cd.chunk.js.LICENSE.txt",
     "static/media/error400.f1ff9c43.png": "/unfriendly_social_nerwork/static/media/error400.f1ff9c43.png",
     "static/media/profile-wallpaper.37f4aa5e.jpg": "/unfriendly_social_nerwork/static/media/profile-wallpaper.37f4aa5e.jpg",
@@ -44,7 +44,7 @@
   "entrypoints": [
     "static/js/runtime-main.60bf2c02.js",
     "static/js/3.4fb155cd.chunk.js",
-    "static/css/main.d2e16851.chunk.css",
+    "static/css/main.a6aef676.chunk.css",
     "static/js/main.04312494.chunk.js"
   ]
 }
