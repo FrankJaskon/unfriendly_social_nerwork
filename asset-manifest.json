@@ -2,11 +2,11 @@
   "files": {
     "static/js/0.d1123abd.chunk.js": "/unfriendly_social_nerwork/static/js/0.d1123abd.chunk.js",
     "static/js/0.d1123abd.chunk.js.map": "/unfriendly_social_nerwork/static/js/0.d1123abd.chunk.js.map",
-    "main.css": "/unfriendly_social_nerwork/static/css/main.a6aef676.chunk.css",
+    "main.css": "/unfriendly_social_nerwork/static/css/main.e0f6ffef.chunk.css",
     "main.js": "/unfriendly_social_nerwork/static/js/main.afc042d2.chunk.js",
     "main.js.map": "/unfriendly_social_nerwork/static/js/main.afc042d2.chunk.js.map",
-    "runtime-main.js": "/unfriendly_social_nerwork/static/js/runtime-main.23497887.js",
-    "runtime-main.js.map": "/unfriendly_social_nerwork/static/js/runtime-main.23497887.js.map",
+    "runtime-main.js": "/unfriendly_social_nerwork/static/js/runtime-main.09719491.js",
+    "runtime-main.js.map": "/unfriendly_social_nerwork/static/js/runtime-main.09719491.js.map",
     "static/js/3.b4b61683.chunk.js": "/unfriendly_social_nerwork/static/js/3.b4b61683.chunk.js",
     "static/js/3.b4b61683.chunk.js.map": "/unfriendly_social_nerwork/static/js/3.b4b61683.chunk.js.map",
     "static/css/4.ae915ccb.chunk.css": "/unfriendly_social_nerwork/static/css/4.ae915ccb.chunk.css",
@@ -18,7 +18,7 @@
     "static/css/6.baccd4f8.chunk.css": "/unfriendly_social_nerwork/static/css/6.baccd4f8.chunk.css",
     "static/js/6.66df0261.chunk.js": "/unfriendly_social_nerwork/static/js/6.66df0261.chunk.js",
     "static/js/6.66df0261.chunk.js.map": "/unfriendly_social_nerwork/static/js/6.66df0261.chunk.js.map",
-    "static/css/7.dfcb26d1.chunk.css": "/unfriendly_social_nerwork/static/css/7.dfcb26d1.chunk.css",
+    "static/css/7.298da2f9.chunk.css": "/unfriendly_social_nerwork/static/css/7.298da2f9.chunk.css",
     "static/js/7.2db4693d.chunk.js": "/unfriendly_social_nerwork/static/js/7.2db4693d.chunk.js",
     "static/js/7.2db4693d.chunk.js.map": "/unfriendly_social_nerwork/static/js/7.2db4693d.chunk.js.map",
     "static/css/8.3b81c12e.chunk.css": "/unfriendly_social_nerwork/static/css/8.3b81c12e.chunk.css",
@@ -35,10 +35,10 @@
     "static/css/4.ae915ccb.chunk.css.map": "/unfriendly_social_nerwork/static/css/4.ae915ccb.chunk.css.map",
     "static/css/5.1eb71779.chunk.css.map": "/unfriendly_social_nerwork/static/css/5.1eb71779.chunk.css.map",
     "static/css/6.baccd4f8.chunk.css.map": "/unfriendly_social_nerwork/static/css/6.baccd4f8.chunk.css.map",
-    "static/css/7.dfcb26d1.chunk.css.map": "/unfriendly_social_nerwork/static/css/7.dfcb26d1.chunk.css.map",
+    "static/css/7.298da2f9.chunk.css.map": "/unfriendly_social_nerwork/static/css/7.298da2f9.chunk.css.map",
     "static/css/8.3b81c12e.chunk.css.map": "/unfriendly_social_nerwork/static/css/8.3b81c12e.chunk.css.map",
     "static/css/9.eab19319.chunk.css.map": "/unfriendly_social_nerwork/static/css/9.eab19319.chunk.css.map",
-    "static/css/main.a6aef676.chunk.css.map": "/unfriendly_social_nerwork/static/css/main.a6aef676.chunk.css.map",
+    "static/css/main.e0f6ffef.chunk.css.map": "/unfriendly_social_nerwork/static/css/main.e0f6ffef.chunk.css.map",
     "static/js/3.b4b61683.chunk.js.LICENSE.txt": "/unfriendly_social_nerwork/static/js/3.b4b61683.chunk.js.LICENSE.txt",
     "static/media/error400.f1ff9c43.png": "/unfriendly_social_nerwork/static/media/error400.f1ff9c43.png",
     "static/media/profile-wallpaper.37f4aa5e.jpg": "/unfriendly_social_nerwork/static/media/profile-wallpaper.37f4aa5e.jpg",
@@ -46,9 +46,9 @@
     "static/media/user-default-photo.d92d7726.jpg": "/unfriendly_social_nerwork/static/media/user-default-photo.d92d7726.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.23497887.js",
+    "static/js/runtime-main.09719491.js",
     "static/js/3.b4b61683.chunk.js",
-    "static/css/main.a6aef676.chunk.css",
+    "static/css/main.e0f6ffef.chunk.css",
     "static/js/main.afc042d2.chunk.js"
   ]
 }
