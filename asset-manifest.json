@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/unfriendly_social_nerwork/static/css/main.c787c306.chunk.css",
-    "main.js": "/unfriendly_social_nerwork/static/js/main.6bb337c3.chunk.js",
-    "main.js.map": "/unfriendly_social_nerwork/static/js/main.6bb337c3.chunk.js.map",
+    "main.css": "/unfriendly_social_nerwork/static/css/main.07ee316b.chunk.css",
+    "main.js": "/unfriendly_social_nerwork/static/js/main.154054e7.chunk.js",
+    "main.js.map": "/unfriendly_social_nerwork/static/js/main.154054e7.chunk.js.map",
     "runtime-main.js": "/unfriendly_social_nerwork/static/js/runtime-main.d58c3673.js",
     "runtime-main.js.map": "/unfriendly_social_nerwork/static/js/runtime-main.d58c3673.js.map",
     "static/js/2.2766292e.chunk.js": "/unfriendly_social_nerwork/static/js/2.2766292e.chunk.js",
     "static/js/2.2766292e.chunk.js.map": "/unfriendly_social_nerwork/static/js/2.2766292e.chunk.js.map",
     "index.html": "/unfriendly_social_nerwork/index.html",
-    "static/css/main.c787c306.chunk.css.map": "/unfriendly_social_nerwork/static/css/main.c787c306.chunk.css.map",
+    "static/css/main.07ee316b.chunk.css.map": "/unfriendly_social_nerwork/static/css/main.07ee316b.chunk.css.map",
     "static/js/2.2766292e.chunk.js.LICENSE.txt": "/unfriendly_social_nerwork/static/js/2.2766292e.chunk.js.LICENSE.txt",
     "static/media/error400.f1ff9c43.png": "/unfriendly_social_nerwork/static/media/error400.f1ff9c43.png",
     "static/media/profile-wallpaper.37f4aa5e.jpg": "/unfriendly_social_nerwork/static/media/profile-wallpaper.37f4aa5e.jpg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.d58c3673.js",
     "static/js/2.2766292e.chunk.js",
-    "static/css/main.c787c306.chunk.css",
-    "static/js/main.6bb337c3.chunk.js"
+    "static/css/main.07ee316b.chunk.css",
+    "static/js/main.154054e7.chunk.js"
   ]
 }
