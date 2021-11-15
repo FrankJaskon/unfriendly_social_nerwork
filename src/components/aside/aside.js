@@ -1,17 +1,14 @@
 import React, {useState} from 'react';
 import Navbar from './navbar';
 import Friends from './friends';
-import {Spin as Hamburger} from 'hamburger-react'
+import Hamburger from 'hamburger-react'
 import {useMediaQuery} from 'react-responsive'
 
 import s from './Aside.module.sass';
 
 const Aside = ({navbar, friends, isAuth}) => {
 
-    const Mobile = ({ children }) => {
-      const isMobile = useMediaQuery({ maxWidth: 767 })
-      return isMobile ? children : null
-    }
+    const isMobile = useMediaQuery({ maxWidth: 767 });
 
     const unitedStyles = `${s.aside} ${s.onOpenStyle}`;
 
@@ -35,12 +32,16 @@ const Aside = ({navbar, friends, isAuth}) => {
     return (
         <div className={s.additionalWrapper}>
             <aside className={asideStyle}>
-                <Mobile>
-                    <div className={s.hamburgerMenuIcon}>
-                        <Hamburger toggled={isOpen} toggle={setOpen} size={24}
-                        onToggle={toggled => {if (toggled) onOpenMenu(); else onCloseMenu();}}/>
+                {isMobile
+                    ? <div className={s.hamburgerMenuIcon}>
+                        <Hamburger
+                            toggled={isOpen}
+                            toggle={setOpen}
+                            size={24}
+                            duration={0.4}
+                            onToggle={toggled => {if (toggled) {onOpenMenu();} else {onCloseMenu();}}} />
                     </div>
-                </Mobile>
+                    : null}
                 <div className={s.navbarFriendsWrapper} >
                     <Navbar navbar={navbar} onClickMenuItem={onClickMenuItem} />
                     {isAuth ? <Friends friendsData={friends} /> : ''}</div>
