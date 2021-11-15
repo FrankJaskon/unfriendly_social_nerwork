@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/news/News.module.sass"],"names":[],"mappings":"AAAA,sBACI,2BAAmC,CACnC,eAAgB,CAChB,iBAAkB","file":"10.1c4e5b26.chunk.css","sourcesContent":[".newsPage {\n    height: calc(100vmin - 60px - 10px);\n    overflow-y: auto;\n    position: relative; }\n"]}
