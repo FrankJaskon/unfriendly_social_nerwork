@@ -1,4 +1,8 @@
 .user
     display: grid
-    grid-template-columns: 200px minmax(240px, 1fr)
-    padding-top: 20px
+    grid-template-columns: 12rem minmax(240px, 1fr)
+    padding: 1.5rem 2rem
+@media (max-width: 767px)
+    .user
+        grid-template-columns: auto minmax(auto, 1fr)
+        padding-top: 10px

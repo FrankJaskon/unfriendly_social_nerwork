@@ -14,8 +14,7 @@ const initialState = {
     totalPagesNumber: null,
     isFetching: false,
     usersFollowingInProgress: [],
-    currentPage: 1,
-    paginatorTotalCount: 10
+    currentPage: 1
 };
 
 const usersReducer = (state = initialState, action) => {

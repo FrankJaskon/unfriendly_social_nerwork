@@ -1,17 +1,17 @@
 import React from 'react';
 
-import s from './ButtonSubmit.module.sass';
+import s from './CustomButton.module.sass';
 
 // stylesBtn = {}, stylesWrapper = {} text = string, callbackOnClick = callback;
 
 // For example //
 
-//<ButtonSubmit stylesBtn={{width: '80px', height: '40px'}}
+//<CustomButton stylesBtn={{width: '80px', height: '40px'}}
 //    stylesWrapper={{display: 'flex', justifyContent: 'end', padding: '1rem'}}
 //    text={'Send'} callbackOnClick={onAddMessage} />
 
-const ButtonSubmit = ({wrapClassName = '', btnClassName = '', text, callbackOnClick, isDisabled, className}) => {
-// const ButtonSubmit = ({stylesBtn, stylesWrapper, text, callbackOnClick, isDisabled, className}) => {
+const CustomButton = ({type, wrapClassName = '', btnClassName = '', text, callbackOnClick, isDisabled, children}) => {
+// const CustomButton = ({stylesBtn, stylesWrapper, text, callbackOnClick, isDisabled, className}) => {
     let wrapperClass = `${s.button__wrap} ${wrapClassName}`;
     let btnClass = `${s.button__submit} ${btnClassName}`;
 
@@ -20,14 +20,14 @@ const ButtonSubmit = ({wrapClassName = '', btnClassName = '', text, callbackOnCl
         <div className={wrapperClass} >
             <button
                 disabled={isDisabled}
-                type='submit'
+                type={type ? type : 'submit'}
                 // className={s.button__submit}
                 className={btnClass}
                 onClick={callbackOnClick} >
-                {text}
+                {text || children}
             </button>
         </div>
     )
 }
 
-export default ButtonSubmit;
+export default CustomButton;

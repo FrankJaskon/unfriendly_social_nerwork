@@ -30,6 +30,7 @@ export const getIsPageLoaded  = createSelector(getIsProfileLoaded, getIsStatusLo
         if (isProfileLoaded && isStatusLoaded) return true;
         else return false;
 });
+
 export const getIsMyPage = createSelector(getMyId, getPageId,
     (myId, userId) => {
         if (myId === userId) return true;

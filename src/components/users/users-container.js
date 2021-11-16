@@ -30,7 +30,7 @@ class UsersContainer extends React.Component {
         this.props.clearUserPage();
     }
     render() {
-        const {authId, isAuth, usersList, usersNumber, totalPagesNumber, paginatorTotalCount, currentPage,
+        const {authId, isAuth, usersList, usersNumber, totalPagesNumber, currentPage,
             isFetching, usersFollowingInProgress} = this.props;
 
         return <Users
@@ -47,15 +47,14 @@ class UsersContainer extends React.Component {
             usersFollowingInProgress={usersFollowingInProgress}
             isAuth={isAuth}
             authId={authId}
-            isFetching={isFetching}
-            paginatorTotalCount={paginatorTotalCount} />
+            isFetching={isFetching} />
     }
 }
 
-const mapStateToProps = ({auth: {id : authId}, users: {usersList, usersNumber, totalPagesNumber,
-    paginatorTotalCount, currentPage, isFetching, usersFollowingInProgress}}) => {
-    return {authId, usersList, usersNumber, totalPagesNumber,
-        paginatorTotalCount, currentPage, isFetching, usersFollowingInProgress}
+const mapStateToProps = ({auth: {id : authId, isAuth}, users: {usersList, usersNumber, totalPagesNumber,
+    currentPage, isFetching, usersFollowingInProgress}}) => {
+    return {isAuth, authId, usersList, usersNumber, totalPagesNumber,
+        currentPage, isFetching, usersFollowingInProgress}
 }
 
 export default compose(

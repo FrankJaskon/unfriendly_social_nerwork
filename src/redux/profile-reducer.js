@@ -120,4 +120,14 @@ export const applyNewStatus = (body) => {
     }
 }
 
+export const saveUserInfoFormData = (data) => {
+    return async (dispatch) => {
+        const {resultCode} = await putData(`profile`, data);
+        if (!resultCode) {
+            console.log('User data was changed.');
+            dispatch(setProfile(data));
+        }
+    }
+}
+
 export default profileReducer;

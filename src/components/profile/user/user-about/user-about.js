@@ -1,35 +1,32 @@
-import React from 'react';
-import ProfileStatus from '../../status';
+import React, {useState} from 'react';
+import CustomButton from '../../../common/buttons/submit/custom-button';
+import {stopChangingOnEscape} from '../../../common/helpers';
+import ProfileData from './profile-data';
+import ProfileDataForm from './profile-data-form';
 
 import s from './UserAbout.module.sass';
 
 const UserAbout = (props) => {
-    const {fullName, lookingForAJob, lookingForAJobDescription, aboutMe, webSites} = props;
+    const [isEditMode, setIsEditMode] = useState(false);
 
-    let i = 0;
+    const onEscapeSetEditModeFalse = (event) => {
+        stopChangingOnEscape(event, isEditMode, setIsEditMode);
+    }
 
-    const userWebSites = webSites.filter(w => w.length > 0)
-        .map(w => (<li key={i++} className={s.webSite}>{`${w}/`}</li>));
+    const saveUserInfoFormData = (data) => {
+        data.userId = props.userId;
+        props.saveUserInfoFormData(data);
+    }
 
-    return (
-        <div className={s.user__about}>
-            <div className={s.userNameWithStatus}>
-                <h3 className={s.user__name}>
-                    {fullName}
-                </h3>
-                <ProfileStatus />
-            </div>
-            <h3 className={s.user__title}>User about:</h3>
-            <div className={s.user__description}>
-                <p className={s['user__item-about']}>Working status:
-                    {lookingForAJob ? ' looking for' : ' not looking for'}</p>
-                <p className={s['user__item-about']}>Descriptions: {lookingForAJobDescription} </p>
-                <p className={s['user__item-about']}>About me: {aboutMe}</p>
-                <ul className={s['user__item-about']}>
-                    <p className={s['user__item-about']}>Contact me:</p>{userWebSites}</ul>
-            </div>
-        </div>
-    )
+    return !isEditMode
+                ? <><ProfileData {...props} />
+                {props.isMyPage && <CustomButton text='Change data'
+                wrapClassName={s.wrapperStyle}
+                callbackOnClick={() => setIsEditMode(true)} />}</>
+                : <ProfileDataForm {...props}
+                saveUserInfoFormData={saveUserInfoFormData}
+                onEscapeSetEditModeFalse={onEscapeSetEditModeFalse}
+                setIsEditMode={setIsEditMode}/>
 }
 
 export default UserAbout;

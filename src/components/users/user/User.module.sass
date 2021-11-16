@@ -17,7 +17,6 @@
                 border-radius: 50%
     .userDescriptionsWrapper
         flex: 6
-        max-width: 47.5rem
         overflow: auto
         .descriptionWrap
             display: flex
@@ -72,3 +71,24 @@
 .wrapperStyle
     width: 60px
     margin: 0 auto
+@media (max-width: 767px)
+    .userWrapper
+        .userImgBtnWrapper
+            .userImgWrap
+                img
+        .userDescriptionsWrapper
+            .descriptionWrap
+                min-width: auto
+                .userNameAgeWrapper
+                    .fullnameLink
+                        &:link
+                        &:hover
+                        .fullname
+                    .userId
+                .userStatus
+                .userLocation
+                    p
+    .wrapperStyle
+        width: 50px
+    .buttonStyle
+        font-size: 1rem

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ButtonSubmit from '../buttons/submit/button-submit';
+import CustomButton from '../buttons/submit/custom-button';
 
 import s from './Pagination.module.sass';
 
@@ -59,10 +59,10 @@ const Pagination = React.memo(({totalPagesNumber, usersNumber, paginatorTotalCou
             {currentPage !== 1
                 ? <div className={s.buttonsGroup}>
                     {currentPage > 10
-                    ? <ButtonSubmit wrapClassName={s.wrapperTenStyle} btnClassName={s.prevTenButtonStyle}
+                    ? <CustomButton wrapClassName={s.wrapperTenStyle} btnClassName={s.prevTenButtonStyle}
                         text={'<<'} callbackOnClick={showPrevTenPage} />
                     : null}
-                    <ButtonSubmit wrapClassName={s.wrapperStyle}
+                    <CustomButton wrapClassName={s.wrapperStyle}
                         text={'Previous'} callbackOnClick={showPrevPage} />
                 </div>
                 : null}
@@ -71,9 +71,9 @@ const Pagination = React.memo(({totalPagesNumber, usersNumber, paginatorTotalCou
             </div>
             {currentPage !== lastPageNumber
             ? <div className={s.buttonsGroup}>
-                    <ButtonSubmit wrapClassName={s.wrapperStyle} text={'Next'} callbackOnClick={showNextPage} />
+                    <CustomButton wrapClassName={s.wrapperStyle} text={'Next'} callbackOnClick={showNextPage} />
                     {currentPage < (lastPageNumber - 10)
-                            ? <ButtonSubmit wrapClassName={s.wrapperTenStyle} btnClassName={s.nextTenButtonStyle}
+                            ? <CustomButton wrapClassName={s.wrapperTenStyle} btnClassName={s.nextTenButtonStyle}
                                 text={'>>'} callbackOnClick={showNextTenPage} />
                         : null}
                 </div>

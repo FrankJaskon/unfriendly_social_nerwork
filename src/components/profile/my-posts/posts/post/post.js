@@ -7,13 +7,15 @@ const Post = (props) => {
     const {text, counterLike} = props;
 
     return (
-        <div className={s.post}>
+        <div className={s.postWrapper}>
             <div className={s['post__user-img']}>
                 <img src={userPhoto}  alt='user-icon'></img>
             </div>
-            <div className={s.post__text}>
-                {text} <span className={s.post__like}>like: {counterLike}</span>
+            <div className={s.post}>
+                <p className={s.post__text}>{text}</p>
+                <div className={s.post__like}>like: {counterLike}</div>
             </div>
+
         </div>
     )
 }

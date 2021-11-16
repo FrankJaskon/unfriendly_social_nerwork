@@ -9,6 +9,9 @@
     z-index: 15
 .hamburgerMenuIcon
     display: none
+@media (max-Width: 991px)
+    .aside
+        min-width: 100px
 @media (max-width: 767px)
     .additionalWrapper
         position: relative
@@ -20,11 +23,11 @@
             width: 55px
             height: calc(100vmax - 50px - .5rem)
             padding: 1rem 0
-            transition: all .1s .2s
+            transition: width .3s
             .hamburgerMenuIcon
                 display: block
                 margin: 0 auto
             .navbarFriendsWrapper
                 height: 100%
         .onOpenStyle
-            width: 200px
+            width: 180px

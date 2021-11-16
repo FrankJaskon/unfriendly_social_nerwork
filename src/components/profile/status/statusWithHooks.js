@@ -4,12 +4,14 @@ import {compose} from 'redux';
 import {getIsMyPage, getUserStatus} from '../../../redux/profile-selectors';
 import {validateTextFieldCreator} from '../../common/validators';
 import {changeUserStatus, applyNewStatus} from '../../../redux/profile-reducer';
+import {stopChangingOnEscape} from '../../common/helpers';
+import CustomButton from '../../common/buttons/submit/custom-button';
 
 import s from './Status.module.sass';
 
 const maxLength = validateTextFieldCreator(300);
 
-const ProfileStatus = ({status, isMyPage, applyNewStatus}) => {
+const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus}) => {
 
     const [editMode, setEditMode] = useState(false);
     const [statusBody, setStatusBody] = useState(status);
@@ -24,13 +26,6 @@ const ProfileStatus = ({status, isMyPage, applyNewStatus}) => {
 
     const onExitEditMode = () => {
         setEditMode(false);
-    }
-
-    const onKeyEscape = (event) => {
-        const {keyCode} = event;
-        if (+keyCode === 27 && editMode) {
-            setEditMode(false);
-        }
     }
 
     const onChangeInput = ({target}) => {
@@ -58,16 +53,18 @@ const ProfileStatus = ({status, isMyPage, applyNewStatus}) => {
                     name='status'
                     id='status'
                     value={statusBody}
-                    onKeyDown={onKeyEscape}
+                    onKeyDown={(e) => stopChangingOnEscape(e, editMode, setEditMode)}
                     onBlur={onExitEditMode}
                     onChange={onChangeInput} ></input>
                 </>
                 : <div className={s.statusField}
                     onDoubleClick={onClickEditMode}>{status ? status : 'User has no status'}</div>}
             </form>
+            <CustomButton wrapClassName={s.wrapperStyle}
+                callbackOnClick={() => 'setIsEditMode(true)'}>Change status</CustomButton>
         </div>
     )
-}
+});
 
 const mapStateToProps = (state) => ({
     status: getUserStatus(state),

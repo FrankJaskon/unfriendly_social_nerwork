@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonSubmit from '../../../common/buttons/submit';
+import CustomButton from '../../../common/buttons/submit';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {validateTextFieldCreator} from '../../../common/validators';
 
@@ -33,7 +33,7 @@ const AddMessage = ({placeholder, addMessage}) => {
                             value={values.newMessageBody} />
                         <ErrorMessage className={s.error} name='newMessageBody' component='div' />
                     </div>
-                    <ButtonSubmit text={'Send'} />
+                    <CustomButton text={'Send'} />
                 </Form>
         }
     </Formik>

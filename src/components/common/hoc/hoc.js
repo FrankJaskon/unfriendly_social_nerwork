@@ -36,7 +36,7 @@ const HOC = {
                 }
             }
             componentWillUnmount() {
-                this.props.setLoadingError('', '');
+                this.props.loadingError.code && this.props.setLoadingError('', '');
             }
             render() {
                 const {loadingError} = this.props;

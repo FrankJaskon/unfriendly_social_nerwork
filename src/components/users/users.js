@@ -2,18 +2,22 @@ import React from 'react';
 import User from './user';
 import Preloader from '../common/preloader';
 import Pagination from '../common/pagination';
+import {useMediaQuery} from 'react-responsive';
 
 import s from './Users.module.sass';
 
-const Users = ({authId, usersList, usersNumber, totalPagesNumber, paginatorTotalCount, currentPage,
+const Users = ({isAuth, authId, usersList, usersNumber, totalPagesNumber, currentPage,
     showNextPage, showNextTenPage, showPrevPage, showPrevTenPage, showNumberPage,
     isFetching, clickOnSubscription, usersFollowingInProgress}) => {
 
     const users = usersList.map(u => <User key={u.id}
+        isAuth={isAuth}
         userData={u}
         clickOnSubscription={clickOnSubscription}
         usersFollowingInProgress={usersFollowingInProgress}
         authId={authId} />);
+
+    const isMobile = useMediaQuery({maxWidth: 767});
 
     return (
         <div className={s.users}>
@@ -27,7 +31,7 @@ const Users = ({authId, usersList, usersNumber, totalPagesNumber, paginatorTotal
                     showNextPage={showNextPage}
                     showNextTenPage={showNextTenPage}
                     isTop={true}
-                    paginatorTotalCount={paginatorTotalCount} /></h3>
+                    paginatorTotalCount={!isMobile ? 10 : 5} /></h3>
             <div className={s.blank}></div>
             {
                 isFetching ? <Preloader />
@@ -42,7 +46,7 @@ const Users = ({authId, usersList, usersNumber, totalPagesNumber, paginatorTotal
                         showNextPage={showNextPage}
                         showNextTenPage={showNextTenPage}
                         isTop={false}
-                        paginatorTotalCount={paginatorTotalCount} />
+                        paginatorTotalCount={!isMobile ? 10 : 5} />
                 </div>
             }
         </div>

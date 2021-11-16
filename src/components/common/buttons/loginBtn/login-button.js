@@ -1,20 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import ButtonSubmit from '../submit';
+import CustomButton from '../submit';
 import {deleteAuthLogin} from '../../../../redux/auth-reducer';
 import {NavLink} from 'react-router-dom';
 
 const LoginButton = ({isAuth, deleteAuthLogin, wrapClassName = '', btnClassName = ''}) => {
 
     return isAuth
-        ? <ButtonSubmit
+        ? <CustomButton
             wrapClassName={wrapClassName}
             btnClassName={btnClassName}
             text={'Log out'}
             callbackOnClick={deleteAuthLogin} />
         : <NavLink to={'/login'} style={{textDecoration: 'none'}} className={wrapClassName}>
-            <ButtonSubmit
+            <CustomButton
                 wrapClassName={wrapClassName}
                 btnClassName={btnClassName}
                 text={'Log in'} />

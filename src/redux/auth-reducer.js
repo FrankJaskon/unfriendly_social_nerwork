@@ -67,6 +67,7 @@ export const setUserAuth = (loginData, setErrors) => {
 }
 
 export const deleteAuthLogin = () => {
+    debugger;
     return (dispatch) => {
         const {resultCode, messages} = loginAPI.deleteLoginData(`/auth/login`);
         if (!resultCode) dispatch(setAuthData({}, false));

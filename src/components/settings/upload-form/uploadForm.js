@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonSubmit from '../../common/buttons/submit';
+import CustomButton from '../../common/buttons/submit';
 import {sendFile} from '../../../redux/settings-reducer';
 
 import s from './UploadForm.module.sass';
@@ -22,7 +22,7 @@ export default class UploadForm extends React.Component {
         return (
             <form className={s.wrapper} >
                 <input type='file' onChange={this.getFile} className={s.fileInput} />
-                <ButtonSubmit
+                <CustomButton
                     btnClassName={s.btnStyle}
                     wrapClassName={s.wrapperStyle}
                     text={btnName}

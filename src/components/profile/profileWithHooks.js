@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
 import MyPosts from './my-posts';
 import User from './user';
-import ProfileImg from './profile-img';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router';
 import HOC from '../common/hoc';
 import {getIsMyPage, getIsPageLoaded, getLoadingError, getProfile} from '../../redux/profile-selectors';
 import {getIsAuth, getMyId} from '../../redux/auth-selectors';
-import {addPost, showUserPage, setLoadingError} from '../../redux/profile-reducer';
+import {addPost, showUserPage, setLoadingError, saveUserInfoFormData} from '../../redux/profile-reducer';
+// import ProfileImg from './profile-img';
 
 import s from './Profile.module.sass';
 import Preloader from '../common/preloader';
 
-const Profile = ({profile: {postsData, newPostBody, placeholderText,
+const Profile = React.memo(({profile: {postsData, newPostBody, placeholderText,
     aboutMe, contacts, lookingForAJob, lookingForAJobDescription,
     fullName, userId, photos: {large}},
-    addPost, isAuth, isLoaded, isMyPage, showUserPage, id, match: {params: {userId : urlId}}}) => {
+    addPost, isAuth, isLoaded, isMyPage, showUserPage, saveUserInfoFormData,
+    id, match: {params: {userId : urlId}}}) => {
+
 
     const pageId = urlId ? urlId : id;
 
@@ -29,7 +31,7 @@ const Profile = ({profile: {postsData, newPostBody, placeholderText,
         {!isLoaded
             ? <Preloader />
             : <>
-            <ProfileImg />
+            {/* <ProfileImg /> */}
             <User
                 aboutMe={aboutMe}
                 contacts={contacts}
@@ -38,7 +40,8 @@ const Profile = ({profile: {postsData, newPostBody, placeholderText,
                 fullName={fullName}
                 photo={large}
                 userId={userId}
-                isMyPage={isMyPage} />
+                isMyPage={isMyPage}
+                saveUserInfoFormData={saveUserInfoFormData} />
             <MyPosts
                 postsData={postsData}
                 newPostBody={newPostBody}
@@ -49,7 +52,7 @@ const Profile = ({profile: {postsData, newPostBody, placeholderText,
             </>
         }
     </div>
-}
+});
 
 const mapStateToProps = (state) => ({
     profile: getProfile(state),
@@ -60,8 +63,11 @@ const mapStateToProps = (state) => ({
     loadingError: getLoadingError(state)
 });
 
+
 export default compose(
-    connect(mapStateToProps, {addPost, showUserPage, setLoadingError}),
+    connect(mapStateToProps, {addPost, showUserPage, setLoadingError, saveUserInfoFormData}),
     withRouter,
     HOC.showPageErrorWrapperComponent
 )(Profile);
+
+// setLoadingError is used for HOC.showPageErrorWrapperComponent

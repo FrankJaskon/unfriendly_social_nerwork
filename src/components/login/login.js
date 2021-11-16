@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonSubmit from '../common/buttons/submit/button-submit';
+import CustomButton from '../common/buttons/submit/custom-button';
 import {useFormik} from 'formik';
 
 import s from './Login.module.sass';
@@ -89,7 +89,7 @@ const Login = ({setUserAuth, isCaptcha, captcha}) => {
                     onChange={login.handleChange}
                     value={login.values.rememberMe} /><span className={s.forgetPassword}>Remember me</span>
                 </div>
-                <ButtonSubmit
+                <CustomButton
                     btnClassName={s.btnStyle}
                     wrapClassName={s.wrapperStyle}
                     text={'Submit'} />

@@ -1,2 +1,2 @@
-import ButtonSubmit from './button-submit';
-export default ButtonSubmit;
+import CustomButton from './custom-button';
+export default CustomButton;
