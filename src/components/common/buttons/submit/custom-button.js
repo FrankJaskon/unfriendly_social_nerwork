@@ -20,7 +20,7 @@ const CustomButton = ({type, wrapClassName = '', btnClassName = '', text, callba
         <div className={wrapperClass} >
             <button
                 disabled={isDisabled}
-                type={type ? type : 'submit'}
+                type={type || 'submit'}
                 // className={s.button__submit}
                 className={btnClass}
                 onClick={callbackOnClick} >

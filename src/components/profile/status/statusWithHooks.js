@@ -9,6 +9,7 @@ import CustomButton from '../../common/buttons/submit/custom-button';
 
 import s from './Status.module.sass';
 
+
 const maxLength = validateTextFieldCreator(300);
 
 const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus}) => {
@@ -24,10 +25,6 @@ const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus}) => {
         if (isMyPage) setEditMode(true);
     }
 
-    const onExitEditMode = () => {
-        setEditMode(false);
-    }
-
     const onChangeInput = ({target}) => {
         setStatusBody(target.value);
     }
@@ -36,32 +33,31 @@ const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus}) => {
         event.preventDefault();
 
         const error = maxLength(statusBody);
-            if (!error) {
-                if (statusBody !== status) {
-                    setEditMode(false);
-                    applyNewStatus(statusBody);
+        if (!error) {
+            if (statusBody !== status) {
+                setEditMode(false);
+                applyNewStatus(statusBody);
                 } else alert('Oops, some problem. New status cannot equal the old status');
             } else alert(error);
-    }
+        }
 
-    return (
-        <div className={s.wrapper}>
-            <form className={s.statusField} onSubmit={onSetNewStatus}>
-            {editMode ?
-                <><input className={s.statusInput}
-                    autoFocus
-                    name='status'
-                    id='status'
-                    value={statusBody}
-                    onKeyDown={(e) => stopChangingOnEscape(e, editMode, setEditMode)}
-                    onBlur={onExitEditMode}
-                    onChange={onChangeInput} ></input>
-                </>
-                : <div className={s.statusField}
-                    onDoubleClick={onClickEditMode}>{status ? status : 'User has no status'}</div>}
-            </form>
-            <CustomButton wrapClassName={s.wrapperStyle}
-                callbackOnClick={() => 'setIsEditMode(true)'}>Change status</CustomButton>
+        return (
+            <div className={s.wrapper}>
+                <form className={s.statusForm} onSubmit={onSetNewStatus}>
+            {editMode ? <> <input className={s.statusInput}
+                        autoFocus
+                        name='status'
+                        id='status'
+                        value={statusBody}
+                        onKeyDown={(e) => stopChangingOnEscape(e, editMode, setEditMode)}
+                        onChange={onChangeInput} ></input>
+                    <CustomButton wrapClassName={s.wrapperStyle}>Save new status</CustomButton></>
+                : <><div className={s.statusField}
+                        onDoubleClick={onClickEditMode}>{status ? status : 'User has no status'}</div>
+                    {isMyPage && <CustomButton wrapClassName={s.wrapperStyle} type='button'
+                        callbackOnClick={() => setEditMode(true)}>Change status</CustomButton>}
+            </>}
+                </form>
         </div>
     )
 });

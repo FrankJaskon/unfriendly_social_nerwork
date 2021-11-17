@@ -1,24 +1,20 @@
+.user__about, .userInfoForm
+    margin: 0 1rem
+    padding: .5rem
+    background: #fafeff
+    border: 1px solid #d1d1d1
+    border-radius: 12px
 .user__about
-    grid-column: 1 / span 2
     .user__title
-        text-align: right
-        margin: 0
-        padding: 0
-        &::before
-            content: ''
-            display: block
-            height: 2px
-            margin: .5rem 0
-            background: #00b7ff10
     .user__description
         margin: 0
         .user__item-about,
         .user__item-contact
             padding: .5rem
-            margin: .5rem 0
+            margin: 1rem 0
             font-size: 1rem
-            line-height: 1rem
-            border: 2px solid #00000023
+            color: #555555
+            border: 1px solid #b2b2b2
             border-radius: 5px
 .user__item-contact
     display: flex
@@ -35,19 +31,55 @@
             &:hover
                 text-decoration: underline
 .user__title
-    font-size: 1.2rem
-    margin: 1rem 0
+    text-align: right
+    margin: 0
     padding: 0
+    // &::before
+    //     content: ''
+    //     display: block
+    //     height: 2px
+    //     margin: .5rem 0
+    //     background: #00b7ff10
 .wrapperStyle
-    grid-column: 1 / span 2
     width: 100%
-    height: 40px
+    height: 2rem
     button
-        color: #777777a4
-        border: 2px solid
-        background: none
-        &:hover
-            color: #fff
+        // color: #777777a4
+        // border: 2px solid
+        // background: none
+        // &:hover
+        //     color: #fff
+.userInfoForm
+    .user__description
+        display: grid
+        grid-template-columns: 1fr 3fr
+        .user__item-about
+            display: flex
+            margin-left: 1rem
+            align-items: center
+            font-weight: 700
+        .statusInput, .requestResponse
+            width: 100%
+            padding: .5rem
+            margin: .5rem 0
+            border: 1px solid
+            // border-radius: 5px
+            // border: 1px solid #25bdd8
+            border: none
+            border-radius: 5px
+            background: #81818146
+            &.checkbox
+                width: auto
+        .requestResponse
+            grid-column: 1 / span 2
+            background: #ffcc00
+    .saveWrapperStyle, .cancelWrapperStyle
+        button
+            padding: .5rem
+            border: 2px solid
+            border-radius: 5px
+    .saveWrapperStyle
+    .cancelWrapperStyle
 // @media (max-width: 767px)
 //     .user__about
 //         .userNameWithStatus

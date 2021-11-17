@@ -5,45 +5,52 @@ import CustomButton from '../../../../common/buttons/submit/custom-button';
 
 import s from '../UserAbout.module.sass';
 
-const DataForm = ({onEscapeSetEditModeFalse, setIsEditMode, contacts,
+const checkbox = `${s.statusInput} ${s.checkbox}`;
+
+const DataForm = React.memo(({serverResponse, onEscapeSetEditModeFalse, changeIsEditMode, contacts,
     values, touched, errors, handleChange, handleBlur, handleSubmit}) => {
 
-    return <form onSubmit={handleSubmit} onKeyDown={(e) => onEscapeSetEditModeFalse(e)}>
-        <h3 className={s.user__title}>User about:</h3>
+    return <form className={s.userInfoForm} onSubmit={handleSubmit} onKeyDown={(e) => onEscapeSetEditModeFalse(e)}>
+        <h3 className={s.user__title}>User about</h3>
         <div className={s.user__description}>
             <label name='fullName' className={s['user__item-about']}>Full name:</label>
-            <Field className={s.statusInput}
-                autoFocus
+            <div>
+                <Field className={s.statusInput}
                 // validate={validateTextFieldCreator(50)}
                 name='fullName'
                 id='fullName'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.fullName || ''} ></Field>
-            {errors.fullName && touched.fullName && <div id="feedback">{errors.fullName}</div>}
+                {errors.fullName && touched.fullName && <div id="feedback">{errors.fullName}</div>}
+            </div>
             <label name='lookingForAJob' className={s['user__item-about']}>Looking for a job?</label>
-            <Field className={s.statusInput}
+            <Field className={checkbox}
                 type='checkbox'
                 name='lookingForAJob' ></Field>
-            <label name='lookingForAJobDescription' className={s['user__item-about']}>Descriptions:</label>
-            <Field className={s.statusInput}
+            <label name='lookingForAJobDescription' className={s['user__item-about']}>My skills:</label>
+            <div>
+                <Field className={s.statusInput}
                 // validate={validateTextFieldCreator(50)}
                 name='lookingForAJobDescription'
                 id='lookingForAJobDescription'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.lookingForAJobDescription || ''} ></Field>
-            {errors.lookingForAJobDescription && touched.lookingForAJobDescription
-            && <div id="feedback">{errors.lookingForAJobDescription}</div>}
+                {errors.lookingForAJobDescription && touched.lookingForAJobDescription
+                    && <div id="feedback">{errors.lookingForAJobDescription}</div>}
+            </div>
             <label name='aboutMe' className={s['user__item-about']}>About me:</label>
-            <Field className={s.statusInput}
+            <div>
+                <Field className={s.statusInput}
                 // validate={validateTextFieldCreator(50)}
                 name='aboutMe'
                 id='aboutMe'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.aboutMe || ''} ></Field>
-            {errors.aboutMe && touched.aboutMe && <div id="feedback">{errors.aboutMe}</div>}
+                {errors.aboutMe && touched.aboutMe && <div id="feedback">{errors.aboutMe}</div>}
+            </div>
             {Object.keys(contacts).map(key => <FormContactField key={key}
                 contactKey={key}
                 handleChange={handleChange}
@@ -51,23 +58,27 @@ const DataForm = ({onEscapeSetEditModeFalse, setIsEditMode, contacts,
                 value={values.contacts[key]}
                 touched={touched}
                 errors={errors} />)}
+            {serverResponse && <div className={s.requestResponse}>{serverResponse}</div>}
+        <CustomButton wrapClassName={s.cancelWrapperStyle}
+            type='button' callbackOnClick={() => changeIsEditMode(false)}>Cancel</CustomButton>
+        <CustomButton wrapClassName={s.saveWrapperStyle} type='submit'>Save</CustomButton>
         </div>
-        <CustomButton type='submit'>Save</CustomButton>
-        <CustomButton type='button' callbackOnClick={() => setIsEditMode(false)}>Cancel</CustomButton>
     </form>
-}
+});
 
 const FormContactField = React.memo(({contactKey, handleChange, handleBlur, value, errors, touched}) => {
     return <>
-    <label name={contactKey} className={s['user__item-about']}>{`${contactKey}: `}</label>
-    <Field className={s.statusInput}
-        // validate={validateTextFieldCreator(50)}
-        name={`contacts.${contactKey}`}
-        id={contactKey}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value} ></Field>
-    {errors.aboutMe && touched.aboutMe && <div id="feedback">{errors.aboutMe}</div>}
+        <label name={contactKey} className={s['user__item-about']}>{`${contactKey}: `}</label>
+        <div>
+            <Field className={s.statusInput}
+            // validate={validateTextFieldCreator(50)}
+            name={`contacts.${contactKey}`}
+            id={contactKey}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={value} ></Field>
+            {errors.aboutMe && touched.aboutMe && <div id="feedback">{errors.aboutMe}</div>}
+        </div>
     </>
 });
 
@@ -85,8 +96,7 @@ const ProfileDataForm = withFormik({
     handleSubmit: (values, {props: {saveUserInfoFormData}}) => {
         saveUserInfoFormData(values);
     },
-
-    displayName: 'BasicForm',
+    displayName: 'UserInfoForm'
 })(DataForm);
 
 export default ProfileDataForm;

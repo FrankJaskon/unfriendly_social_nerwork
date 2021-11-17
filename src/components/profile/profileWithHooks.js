@@ -5,15 +5,15 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router';
 import HOC from '../common/hoc';
-import {getIsMyPage, getIsPageLoaded, getLoadingError, getProfile} from '../../redux/profile-selectors';
+import {getIsMyPage, getIsPageLoaded, getLoadingError, getProfile, getServerResponse} from '../../redux/profile-selectors';
 import {getIsAuth, getMyId} from '../../redux/auth-selectors';
-import {addPost, showUserPage, setLoadingError, saveUserInfoFormData} from '../../redux/profile-reducer';
+import {addPost, showUserPage, setLoadingError, saveUserInfoFormData, setServerResponse} from '../../redux/profile-reducer';
 // import ProfileImg from './profile-img';
 
 import s from './Profile.module.sass';
 import Preloader from '../common/preloader';
 
-const Profile = React.memo(({profile: {postsData, newPostBody, placeholderText,
+const Profile = ({serverResponse, setServerResponse, profile: {postsData, newPostBody, placeholderText,
     aboutMe, contacts, lookingForAJob, lookingForAJobDescription,
     fullName, userId, photos: {large}},
     addPost, isAuth, isLoaded, isMyPage, showUserPage, saveUserInfoFormData,
@@ -41,7 +41,9 @@ const Profile = React.memo(({profile: {postsData, newPostBody, placeholderText,
                 photo={large}
                 userId={userId}
                 isMyPage={isMyPage}
-                saveUserInfoFormData={saveUserInfoFormData} />
+                saveUserInfoFormData={saveUserInfoFormData}
+                serverResponse={serverResponse}
+                setServerResponse={setServerResponse} />
             <MyPosts
                 postsData={postsData}
                 newPostBody={newPostBody}
@@ -52,7 +54,7 @@ const Profile = React.memo(({profile: {postsData, newPostBody, placeholderText,
             </>
         }
     </div>
-});
+};
 
 const mapStateToProps = (state) => ({
     profile: getProfile(state),
@@ -60,12 +62,13 @@ const mapStateToProps = (state) => ({
     id: getMyId(state),
     isLoaded: getIsPageLoaded(state),
     isMyPage: getIsMyPage(state),
-    loadingError: getLoadingError(state)
+    loadingError: getLoadingError(state),
+    serverResponse: getServerResponse(state)
 });
 
 
 export default compose(
-    connect(mapStateToProps, {addPost, showUserPage, setLoadingError, saveUserInfoFormData}),
+    connect(mapStateToProps, {addPost, showUserPage, setLoadingError, saveUserInfoFormData, setServerResponse}),
     withRouter,
     HOC.showPageErrorWrapperComponent
 )(Profile);

@@ -5,7 +5,8 @@ const ADD_POST = 'unfriendly-network/profile/ADD-POST',
       SET_PROFILE_STATUS = 'unfriendly-network/profile/SET-PROFILE-STATUS',
       SET_IS_PROFILE_LOADED = 'unfriendly-network/profile/SET-IS-PROFILE-LOADED',
       SET_IS_STATUS_LOADED = 'unfriendly-network/profile/SET-IS-STATUS-LOADED',
-      SET_LOADING_ERROR = 'unfriendly-network/profile/SET-LOADING-ERROR';
+      SET_LOADING_ERROR = 'unfriendly-network/profile/SET-LOADING-ERROR',
+      SET_SERVER_RESPONSE = 'unfriendly-network/profile/SET-SERVER-RESPONSE';
 
 const initialState = {
     status: '',
@@ -32,7 +33,8 @@ const initialState = {
     loadingError: {
         code: '',
         message: ''
-    }
+    },
+    serverResponse: ''
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -54,8 +56,6 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.userData,
-                contacts: {...action.userData.contacts},
-                photos: {...action.userData.photos},
                 isProfileLoaded: true,
                 error: action.userData.error
             }
@@ -80,6 +80,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 loadingError: {...state.loadingError, ...action}
             }
+        case SET_SERVER_RESPONSE:
+            return {
+                ...state,
+                serverResponse: action.serverResponse
+            }
         default:
             return state;
     }
@@ -91,6 +96,7 @@ export const changeUserStatus = (statusText) => ({type: SET_PROFILE_STATUS, stat
 export const setIsProfileLoaded = (value) => ({type: SET_IS_PROFILE_LOADED, isLoaded: value});
 export const setIsStatusLoaded = (value) => ({type: SET_IS_STATUS_LOADED, isLoaded: value});
 export const setLoadingError = (code, message) => ({type: SET_LOADING_ERROR, code, message});
+export const setServerResponse = (message) => ({type: SET_SERVER_RESPONSE, serverResponse: message});
 
 export const showUserPage = (userId) => {
     return async (dispatch) => {
@@ -122,11 +128,11 @@ export const applyNewStatus = (body) => {
 
 export const saveUserInfoFormData = (data) => {
     return async (dispatch) => {
-        const {resultCode} = await putData(`profile`, data);
+        const {resultCode, messages} = await putData(`profile`, data);
         if (!resultCode) {
-            console.log('User data was changed.');
+            dispatch(setServerResponse('Successfully. User data was changed.'));
             dispatch(setProfile(data));
-        }
+        } else if (messages) setServerResponse(messages[0]);
     }
 }
 

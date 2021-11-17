@@ -1,32 +1,40 @@
 import React, {useState} from 'react';
-import CustomButton from '../../../common/buttons/submit/custom-button';
 import {stopChangingOnEscape} from '../../../common/helpers';
 import ProfileData from './profile-data';
 import ProfileDataForm from './profile-data-form';
 
-import s from './UserAbout.module.sass';
+// import s from './UserAbout.module.sass';
 
 const UserAbout = (props) => {
+    const {setServerResponse, serverResponse} = props;
+
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const onEscapeSetEditModeFalse = (event) => {
-        stopChangingOnEscape(event, isEditMode, setIsEditMode);
+    const {lookingForAJob, lookingForAJobDescription} = props;
+
+    const changeIsEditMode = (value) => {
+        setIsEditMode(value);
+        if (value && serverResponse) setServerResponse('');
     }
 
+    const onEscapeSetEditModeFalse = (event) => {
+        stopChangingOnEscape(event, isEditMode, changeIsEditMode);
+    }
+
+
     const saveUserInfoFormData = (data) => {
-        data.userId = props.userId;
-        props.saveUserInfoFormData(data);
+        props.saveUserInfoFormData({...data, userId : props.userId});
     }
 
     return !isEditMode
-                ? <><ProfileData {...props} />
-                {props.isMyPage && <CustomButton text='Change data'
-                wrapClassName={s.wrapperStyle}
-                callbackOnClick={() => setIsEditMode(true)} />}</>
+                ? <ProfileData lookingForAJob={lookingForAJob}
+                    lookingForAJobDescription={lookingForAJobDescription}
+                    changeIsEditMode={changeIsEditMode}
+                    title='Professional info' />
                 : <ProfileDataForm {...props}
-                saveUserInfoFormData={saveUserInfoFormData}
-                onEscapeSetEditModeFalse={onEscapeSetEditModeFalse}
-                setIsEditMode={setIsEditMode}/>
+                    saveUserInfoFormData={saveUserInfoFormData}
+                    onEscapeSetEditModeFalse={onEscapeSetEditModeFalse}
+                    changeIsEditMode={changeIsEditMode} />
 }
 
 export default UserAbout;

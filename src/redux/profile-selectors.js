@@ -25,6 +25,10 @@ export const getLoadingError = ({profile: {loadingError}}) => {
     return loadingError;
 }
 
+export const getServerResponse = ({profile: {serverResponse}}) => {
+    return serverResponse;
+}
+
 export const getIsPageLoaded  = createSelector(getIsProfileLoaded, getIsStatusLoaded,
     (isProfileLoaded, isStatusLoaded) => {
         if (isProfileLoaded && isStatusLoaded) return true;

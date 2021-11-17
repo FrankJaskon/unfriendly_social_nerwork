@@ -1,19 +1,25 @@
 import React from 'react';
 import UserAbout from './user-about';
+import ProfileData from './user-about/profile-data';
 import UserNameWithStatus from './user-about/user-name-with-status';
 import UserImg from './user-img';
 
 import s from './User.module.sass';
 
-const User = ({saveUserInfoFormData, userId, aboutMe, contacts, lookingForAJob,
+const User = ({setServerResponse, serverResponse, saveUserInfoFormData, userId, aboutMe, contacts, lookingForAJob,
     lookingForAJobDescription, fullName, photo, isMyPage
 }) => {
     return (
         <div className={s.user}>
-            <UserImg
-                src={photo}
-                isMyPage={isMyPage} />
-            <UserNameWithStatus fullName={fullName} />
+            <div className={s.userHeader}>
+                <UserImg
+                    src={photo}
+                    isMyPage={isMyPage} />
+                <div>
+                    <UserNameWithStatus fullName={fullName} />
+                    <ProfileData aboutMe={aboutMe} contacts={contacts} wrapperInfoClassName={s.wrapperInfoStyle} />
+                </div>
+            </div>
             <UserAbout
                 saveUserInfoFormData={saveUserInfoFormData}
                 fullName={fullName}
@@ -22,7 +28,9 @@ const User = ({saveUserInfoFormData, userId, aboutMe, contacts, lookingForAJob,
                 aboutMe={aboutMe}
                 contacts={contacts}
                 isMyPage={isMyPage}
-                userId={userId} />
+                userId={userId}
+                serverResponse={serverResponse}
+                setServerResponse={setServerResponse} />
         </div>
     )
 }
