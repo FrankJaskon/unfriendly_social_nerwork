@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {getIsMyPage, getUserStatus} from '../../../redux/profile-selectors';
 import {validateTextFieldCreator} from '../../common/validators';
-import {changeUserStatus, applyNewStatus} from '../../../redux/profile-reducer';
+import {applyNewStatus} from '../../../redux/profile-reducer';
 import {stopChangingOnEscape} from '../../common/helpers';
 import CustomButton from '../../common/buttons/submit/custom-button';
 
@@ -12,7 +12,7 @@ import s from './Status.module.sass';
 
 const maxLength = validateTextFieldCreator(300);
 
-const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus}) => {
+const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus, setServerResponse}) => {
 
     const [editMode, setEditMode] = useState(false);
     const [statusBody, setStatusBody] = useState(status);
@@ -37,7 +37,7 @@ const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus}) => {
             if (statusBody !== status) {
                 setEditMode(false);
                 applyNewStatus(statusBody);
-                } else alert('Oops, some problem. New status cannot equal the old status');
+                } else setServerResponse('Oops, some problem. New status cannot equal the old status');
             } else alert(error);
         }
 
@@ -64,5 +64,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-    connect(mapStateToProps, {changeUserStatus, applyNewStatus})
+    connect(mapStateToProps, {applyNewStatus})
 )(ProfileStatus);

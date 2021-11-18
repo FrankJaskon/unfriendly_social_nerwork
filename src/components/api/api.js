@@ -21,6 +21,12 @@ export const putData = async (URL, body = {}) => {
     return data;
 }
 
+export const profileAPI =  {
+    updateUserImg: (URL, body) => {
+        return putData(URL, body, {headers: {'Content-Type': 'multipart/form-data'}});
+    }
+}
+
 export const usersAPI =  {
     postFollowing: (URL, body) => {
         return postData(URL, body);
@@ -44,8 +50,8 @@ export const loginAPI =  {
     }
 }
 
-export const settingsAPI =  {
-    updateImg: (URL, body) => {
-        return putData(URL, body, {headers: {'Content-Type': 'multipart/form-data'}});
-    }
-}
+// export const settingsAPI =  {
+//     updateImg: (URL, body) => {
+//         return putData(URL, body, {headers: {'Content-Type': 'multipart/form-data'}});
+//     }
+// }

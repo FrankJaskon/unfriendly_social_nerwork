@@ -1,4 +1,5 @@
 import React from 'react';
+import ErrorField from '../../common/error/error-field';
 import UserAbout from './user-about';
 import ProfileData from './user-about/profile-data';
 import UserNameWithStatus from './user-about/user-name-with-status';
@@ -6,17 +7,20 @@ import UserImg from './user-img';
 
 import s from './User.module.sass';
 
-const User = ({setServerResponse, serverResponse, saveUserInfoFormData, userId, aboutMe, contacts, lookingForAJob,
+const User = ({setServerResponse, saveNewUserPhoto, serverResponse,
+    saveUserInfoFormData, userId, aboutMe, contacts, lookingForAJob,
     lookingForAJobDescription, fullName, photo, isMyPage
 }) => {
     return (
         <div className={s.user}>
+            <ErrorField serverResponse={serverResponse} setServerResponse={setServerResponse} />
             <div className={s.userHeader}>
                 <UserImg
                     src={photo}
-                    isMyPage={isMyPage} />
+                    isMyPage={isMyPage}
+                    saveNewUserPhoto={saveNewUserPhoto} />
                 <div className={s.infoPartOfUserHeader}>
-                    <UserNameWithStatus fullName={fullName} />
+                    <UserNameWithStatus fullName={fullName} setServerResponse={setServerResponse} />
                     <ProfileData aboutMe={aboutMe}
                         contacts={contacts}
                         wrapperInfoClassName={s.wrapperInfoStyle}
@@ -33,8 +37,7 @@ const User = ({setServerResponse, serverResponse, saveUserInfoFormData, userId, 
                 contacts={contacts}
                 isMyPage={isMyPage}
                 userId={userId}
-                serverResponse={serverResponse}
-                setServerResponse={setServerResponse} />
+                serverResponse={serverResponse} />
         </div>
     )
 }

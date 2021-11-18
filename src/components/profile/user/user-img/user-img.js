@@ -1,20 +1,17 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import userPhoto from '../../../../assets/images/user-default-photo.jpg';
-import CustomButton from '../../../common/buttons/submit/custom-button';
+import UploadUserPhoto from '../../../common/upload-form';
 
 import s from './UserImg.module.sass';
 
-const UserImg = ({isMyPage, src}) => {
+const UserImg = ({isMyPage, src, saveNewUserPhoto}) => {
     return <div className={s.userPhotoWrapper}>
         {isMyPage
         ? <>
-            <NavLink to='/settings' className={s.imgWrapper}>
-                {/* <div className={s.imgWrapper}> */}
-                    <img src={src ? src : userPhoto}  alt='user-img'></img>
-                {/* </div> */}
-            </NavLink>
-            <CustomButton wrapClassName={s.wrapperStyle}>Change photo</CustomButton>
+            <div className={s.imgWrapper}>
+                <img src={src ? src : userPhoto}  alt='user-img'></img>
+            </div>
+            <UploadUserPhoto saveNewUserPhoto={saveNewUserPhoto} />
         </>
         : <div className={s.imgWrapper}>
             <img src={src ? src : userPhoto}  alt='user-img'></img>

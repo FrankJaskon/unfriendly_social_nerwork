@@ -7,13 +7,15 @@ import {Redirect, withRouter} from 'react-router';
 import HOC from '../common/hoc';
 import {getIsMyPage, getIsPageLoaded, getLoadingError, getProfile, getServerResponse} from '../../redux/profile-selectors';
 import {getIsAuth, getMyId} from '../../redux/auth-selectors';
-import {addPost, showUserPage, setLoadingError, saveUserInfoFormData, setServerResponse} from '../../redux/profile-reducer';
+import {addPost, showUserPage, setLoadingError,
+    saveUserInfoFormData, setServerResponse, saveNewUserPhoto} from '../../redux/profile-reducer';
 // import ProfileImg from './profile-img';
 
 import s from './Profile.module.sass';
 import Preloader from '../common/preloader';
 
-const Profile = ({serverResponse, setServerResponse, profile: {postsData, newPostBody, placeholderText,
+const Profile = ({saveNewUserPhoto, serverResponse, setServerResponse,
+    profile: {postsData, newPostBody, placeholderText,
     aboutMe, contacts, lookingForAJob, lookingForAJobDescription,
     fullName, userId, photos: {large}},
     addPost, isAuth, isLoaded, isMyPage, showUserPage, saveUserInfoFormData,
@@ -24,7 +26,8 @@ const Profile = ({serverResponse, setServerResponse, profile: {postsData, newPos
 
     useEffect(() => {
         if (pageId) showUserPage(pageId);
-    }, [pageId, showUserPage]);
+        return setServerResponse('');
+    }, [pageId, showUserPage, setServerResponse]);
 
     if (!pageId) return <Redirect to='/login' />;
     return  <div className={s.profile__wrapper}>
@@ -42,8 +45,9 @@ const Profile = ({serverResponse, setServerResponse, profile: {postsData, newPos
                 userId={userId}
                 isMyPage={isMyPage}
                 saveUserInfoFormData={saveUserInfoFormData}
+                setServerResponse={setServerResponse}
                 serverResponse={serverResponse}
-                setServerResponse={setServerResponse} />
+                saveNewUserPhoto={saveNewUserPhoto} />
             <MyPosts
                 postsData={postsData}
                 newPostBody={newPostBody}
@@ -68,7 +72,8 @@ const mapStateToProps = (state) => ({
 
 
 export default compose(
-    connect(mapStateToProps, {addPost, showUserPage, setLoadingError, saveUserInfoFormData, setServerResponse}),
+    connect(mapStateToProps, {addPost, showUserPage, setLoadingError,
+        saveUserInfoFormData, setServerResponse, saveNewUserPhoto}),
     withRouter,
     HOC.showPageErrorWrapperComponent
 )(Profile);

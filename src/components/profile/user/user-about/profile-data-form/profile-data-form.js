@@ -7,7 +7,7 @@ import s from '../UserAbout.module.sass';
 
 const checkbox = `${s.statusInput} ${s.checkbox}`;
 
-const DataForm = React.memo(({serverResponse, onEscapeSetEditModeFalse, changeIsEditMode, contacts,
+const DataForm = React.memo(({onEscapeSetEditModeFalse, changeIsEditMode, contacts,
     values, touched, errors, handleChange, handleBlur, handleSubmit}) => {
 
     return <form className={s.userInfoForm} onSubmit={handleSubmit} onKeyDown={(e) => onEscapeSetEditModeFalse(e)}>
@@ -58,7 +58,6 @@ const DataForm = React.memo(({serverResponse, onEscapeSetEditModeFalse, changeIs
                 value={values.contacts[key]}
                 touched={touched}
                 errors={errors} />)}
-            {serverResponse && <div className={s.requestResponse}>{serverResponse}</div>}
         <CustomButton wrapClassName={s.cancelWrapperStyle}
             type='button' callbackOnClick={() => changeIsEditMode(false)}>Cancel</CustomButton>
         <CustomButton wrapClassName={s.saveWrapperStyle} type='submit'>Save</CustomButton>
@@ -93,8 +92,9 @@ const ProfileDataForm = withFormik({
         lookingForAJobDescription,
         aboutMe,
         contacts: {...newContacts}})},
-    handleSubmit: (values, {props: {saveUserInfoFormData}}) => {
+    handleSubmit: (values, {props: {saveUserInfoFormData, changeIsEditMode}}) => {
         saveUserInfoFormData(values);
+        changeIsEditMode(false);
     },
     displayName: 'UserInfoForm'
 })(DataForm);

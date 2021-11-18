@@ -6,15 +6,12 @@ import ProfileDataForm from './profile-data-form';
 // import s from './UserAbout.module.sass';
 
 const UserAbout = (props) => {
-    const {setServerResponse, serverResponse} = props;
 
     const [isEditMode, setIsEditMode] = useState(false);
-
     const {lookingForAJob, lookingForAJobDescription} = props;
 
     const changeIsEditMode = (value) => {
         setIsEditMode(value);
-        if (value && serverResponse) setServerResponse('');
     }
 
     const onEscapeSetEditModeFalse = (event) => {

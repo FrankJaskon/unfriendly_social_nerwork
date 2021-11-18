@@ -17,7 +17,7 @@ const ProfileData = ({title, lookingForAJob = null, lookingForAJobDescription,
             {lookingForAJobDescription
                 && <p className={itemClass}><b>My skills: </b> {lookingForAJobDescription} </p>}
             {aboutMe && <p className={itemClass}><b>About me:</b> {aboutMe}</p>}
-            {contacts && <div className={contactsWrapperClass}><div><b>Contact me: </b></div>
+            {contacts && <div className={contactsWrapperClass}><div><b>My contacts: </b></div>
                 {Object.keys(contacts).map(key => contacts[key]
                     ? <Contact key={key} contactKey={key} contactValue={contacts[key]}/>
                     :null)}

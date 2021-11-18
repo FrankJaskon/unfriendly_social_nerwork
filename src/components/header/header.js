@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import LoginButton from '../common/buttons/loginBtn';
+import CustomButton from '../common/buttons/loginBtn';
 
 import s from './Header.module.sass';
 
@@ -18,7 +18,7 @@ const Header = ({header: {login, isAuth}}) => {
                             : <span className={s.additionalTitleContent}>Welcome to unfriendly social network</span>
                         }
                     </div>
-                            <LoginButton wrapClassName={s.wrapperStyle} btnClassName={s.btnStyle} />
+                            <CustomButton wrapClassName={s.wrapperStyle} btnClassName={s.btnStyle} />
                 </h1>
 
             </div>
