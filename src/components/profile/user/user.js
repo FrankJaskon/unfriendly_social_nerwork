@@ -15,9 +15,13 @@ const User = ({setServerResponse, serverResponse, saveUserInfoFormData, userId, 
                 <UserImg
                     src={photo}
                     isMyPage={isMyPage} />
-                <div>
+                <div className={s.infoPartOfUserHeader}>
                     <UserNameWithStatus fullName={fullName} />
-                    <ProfileData aboutMe={aboutMe} contacts={contacts} wrapperInfoClassName={s.wrapperInfoStyle} />
+                    <ProfileData aboutMe={aboutMe}
+                        contacts={contacts}
+                        wrapperInfoClassName={s.wrapperInfoStyle}
+                        itemInfoClass={s.userItemAbout}
+                        contactsWrapperInfoClass={s.contactsWrapperInfoClass} />
                 </div>
             </div>
             <UserAbout

@@ -41,25 +41,21 @@ const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus}) => {
             } else alert(error);
         }
 
-        return (
-            <div className={s.wrapper}>
-                <form className={s.statusForm} onSubmit={onSetNewStatus}>
-            {editMode ? <> <input className={s.statusInput}
-                        autoFocus
-                        name='status'
-                        id='status'
-                        value={statusBody}
-                        onKeyDown={(e) => stopChangingOnEscape(e, editMode, setEditMode)}
-                        onChange={onChangeInput} ></input>
-                    <CustomButton wrapClassName={s.wrapperStyle}>Save new status</CustomButton></>
-                : <><div className={s.statusField}
-                        onDoubleClick={onClickEditMode}>{status ? status : 'User has no status'}</div>
-                    {isMyPage && <CustomButton wrapClassName={s.wrapperStyle} type='button'
-                        callbackOnClick={() => setEditMode(true)}>Change status</CustomButton>}
-            </>}
-                </form>
-        </div>
-    )
+        return <form className={s.statusForm} onSubmit={onSetNewStatus}>
+                {editMode ? <> <input className={s.statusInput}
+                            autoFocus
+                            name='status'
+                            id='status'
+                            value={statusBody}
+                            onKeyDown={(e) => stopChangingOnEscape(e, editMode, setEditMode)}
+                            onChange={onChangeInput} ></input>
+                        <CustomButton wrapClassName={s.wrapperStyle}>Save new status</CustomButton></>
+                    : <><div className={s.statusField}
+                            onDoubleClick={onClickEditMode}>{status ? status : 'User has no status'}</div>
+                        {isMyPage && <CustomButton wrapClassName={s.wrapperStyle} type='button'
+                            callbackOnClick={() => setEditMode(true)}>Change status</CustomButton>}
+                </>}
+        </form>
 });
 
 const mapStateToProps = (state) => ({

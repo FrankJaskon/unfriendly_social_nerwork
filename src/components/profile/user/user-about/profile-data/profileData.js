@@ -4,24 +4,24 @@ import CustomButton from '../../../../common/buttons/submit/custom-button';
 import s from '../UserAbout.module.sass';
 
 const ProfileData = ({title, lookingForAJob = null, lookingForAJobDescription,
-    aboutMe, contacts, changeIsEditMode, wrapperInfoClassName}) => {
+    aboutMe, contacts, changeIsEditMode, wrapperInfoClassName, itemInfoClass, contactsWrapperInfoClass}) => {
 
     let wrapperClass = `${s.user__about} ${wrapperInfoClassName}`;
+    let itemClass = `${s['user__item-about']} ${itemInfoClass}`;
+    let contactsWrapperClass = `${s['user__item-contact']} ${contactsWrapperInfoClass}`;
 
     return <div className={wrapperClass}>
             {title && <h3 className={s.user__title}><b>{title}</b></h3>}
-            <div className={s.user__description}>
-                {lookingForAJob !== null && <p className={s['user__item-about']}><b>Working status:</b>
-                    {lookingForAJob ? ' looking for' : ' not looking for'}</p>}
-                {lookingForAJobDescription
-                    && <p className={s['user__item-about']}><b>My skills: </b> {lookingForAJobDescription} </p>}
-                {aboutMe && <p className={s['user__item-about']}><b>About me:</b> {aboutMe}</p>}
-                {contacts && <div className={s['user__item-contact']}><div><b>Contact me: </b></div>
-                    {Object.keys(contacts).map(key => contacts[key]
-                        ? <Contact key={key} contactKey={key} contactValue={contacts[key]}/>
-                        :null)}
-                </div>}
-            </div>
+            {lookingForAJob !== null && <p className={itemClass}><b>Working status:</b>
+                {lookingForAJob ? ' looking for' : ' not looking for'}</p>}
+            {lookingForAJobDescription
+                && <p className={itemClass}><b>My skills: </b> {lookingForAJobDescription} </p>}
+            {aboutMe && <p className={itemClass}><b>About me:</b> {aboutMe}</p>}
+            {contacts && <div className={contactsWrapperClass}><div><b>Contact me: </b></div>
+                {Object.keys(contacts).map(key => contacts[key]
+                    ? <Contact key={key} contactKey={key} contactValue={contacts[key]}/>
+                    :null)}
+            </div>}
             {changeIsEditMode && <CustomButton text='Change data'
                 wrapClassName={s.wrapperStyle}
                 callbackOnClick={() => changeIsEditMode(true)} />}

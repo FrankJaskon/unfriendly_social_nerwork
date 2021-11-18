@@ -9,10 +9,10 @@ const UserImg = ({isMyPage, src}) => {
     return <div className={s.userPhotoWrapper}>
         {isMyPage
         ? <>
-            <NavLink to='/settings' >
-                <div className={s.imgWrapper}>
+            <NavLink to='/settings' className={s.imgWrapper}>
+                {/* <div className={s.imgWrapper}> */}
                     <img src={src ? src : userPhoto}  alt='user-img'></img>
-                </div>
+                {/* </div> */}
             </NavLink>
             <CustomButton wrapClassName={s.wrapperStyle}>Change photo</CustomButton>
         </>

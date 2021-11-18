@@ -1,25 +1,28 @@
 .userPhotoWrapper
-    width: 14rem
-    max-height: 22rem
-    margin: 1rem 1rem
+    display: flex
+    flex-direction: column
+    // max-height: 22.5rem
+    // margin: 1rem
     // padding: .25rem 0
     // background: #fafeff
     // border: 1px solid #d1d1d1
     // border-radius: 12px
     .imgWrapper
-        width: 14rem
-        height: 19rem
+        flex: 10
+        // width: 14rem
+        // height: 19rem
         // margin: .5rem auto
         img
             object-fit: cover
             width: 100%
             height: 100%
             border-radius: 5px
-            border-top-left-radius: 12px
-            border-top-right-radius: 12px
+            // border-top-left-radius: 12px
+            // border-top-right-radius: 12px
 .wrapperStyle
+    flex: 1
     width: 100%
-    height: 2rem
+    // height: 2rem
     margin: 0
     margin-top: .5rem
     background: #fafeff
@@ -30,7 +33,10 @@
         border-radius: 5px
         &:hover
             color: #fff
-@media (max-width: 767px)
-    .userImgWrapper
-        width: 80px
-        height: 80px
+@media (max-width: 450px)
+    .userPhotoWrapper
+        display: flex
+        flex-direction: column
+        .imgWrapper
+            img
+                border-radius: 3px
