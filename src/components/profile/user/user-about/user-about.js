@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {stopChangingOnEscape} from '../../../common/helpers';
 import ProfileData from './profile-data';
 import ProfileDataForm from './profile-data-form';
@@ -8,7 +8,15 @@ import ProfileDataForm from './profile-data-form';
 const UserAbout = (props) => {
 
     const [isEditMode, setIsEditMode] = useState(false);
-    const {lookingForAJob, lookingForAJobDescription} = props;
+    const {setIsSuccessResponse, isSuccessResponse, lookingForAJob, lookingForAJobDescription} = props;
+
+    useEffect(() => {
+        if (isSuccessResponse) {
+            setIsEditMode(false)
+            setIsSuccessResponse(false);
+
+        };
+    }, [isSuccessResponse, setIsSuccessResponse]);
 
     const changeIsEditMode = (value) => {
         setIsEditMode(value);
@@ -18,9 +26,8 @@ const UserAbout = (props) => {
         stopChangingOnEscape(event, isEditMode, changeIsEditMode);
     }
 
-
-    const saveUserInfoFormData = (data) => {
-        props.saveUserInfoFormData({...data, userId : props.userId});
+    const saveUserInfoFormDataWithId = (data, setErrors) => {
+        props.saveUserInfoFormData({...data, userId : props.userId}, setErrors);
     }
 
     return !isEditMode
@@ -29,7 +36,7 @@ const UserAbout = (props) => {
                     changeIsEditMode={changeIsEditMode}
                     title='Professional info' />
                 : <ProfileDataForm {...props}
-                    saveUserInfoFormData={saveUserInfoFormData}
+                    saveUserInfoFormDataWithId={saveUserInfoFormDataWithId}
                     onEscapeSetEditModeFalse={onEscapeSetEditModeFalse}
                     changeIsEditMode={changeIsEditMode} />
 }

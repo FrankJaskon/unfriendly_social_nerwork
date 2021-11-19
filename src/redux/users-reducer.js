@@ -25,10 +25,10 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersList: state.usersList.map(user => {
-                    if (+action.userId === +user.id) {
+                    if (+action.payload.userId === +user.id) {
                         return {
                             ...user,
-                            followed: action.isFollowed ? action.isFollowed : false
+                            followed: action.payload.isFollowed || false
                         };
                     }
                     return user;
@@ -37,7 +37,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                usersList: [...action.users]
+                usersList: [...action.payload.usersList]
             };
         case DELETE_USERS:
             return {
@@ -45,40 +45,32 @@ const usersReducer = (state = initialState, action) => {
                 usersList: []
             };
         case SET_TOTAL_PAGES_COUNT:
-            return {
-                ...state,
-                totalPagesNumber: action.totalCount,
-            };
         case SET_CURRENT_PAGE:
-            return {
-                ...state,
-                currentPage: action.currentPage
-            };
         case SET_PRELOADER:
             return {
                 ...state,
-                isFetching: action.isFetching
-            }
+                ...action.payload
+            };
         case TOGGLE_IS_FOLLOWING_PROGRESS:
             return {
                 ...state,
-                usersFollowingInProgress:
-                    action.isInProgress
-                    ? [...state.usersFollowingInProgress, action.userId]
-                    : [state.usersFollowingInProgress.filter(id => id !== action.userId)]
+                usersFollowingInProgress: action.payload.isInProgress
+                    ? [...state.usersFollowingInProgress, action.payload.userId]
+                    : [state.usersFollowingInProgress.filter(id => id !== action.payload.userId)]
             }
         default:
             return state;
     }
 }
 
-export const toggleFollowingStatus = (userId, isFollowed) => ({type: TOGGLE_FOLLOWING_STATUS, userId, isFollowed});
-export const setUsers = (users) => ({type: SET_USERS, users});
+export const toggleFollowingStatus = (userId, isFollowed) => ({type: TOGGLE_FOLLOWING_STATUS, payload: {userId, isFollowed}});
+export const setUsers = (usersList) => ({type: SET_USERS, payload: {usersList}});
 export const deleteUsers = () => ({type: DELETE_USERS});
-export const setTotal = (total) => ({type: SET_TOTAL_PAGES_COUNT, totalCount: total});
-export const setCurrentPage = (value) => ({type: SET_CURRENT_PAGE, currentPage: value});
-export const setPreloadValue = (value) => ({type: SET_PRELOADER, isFetching: value});
-export const toggleFollowingProgress = (value, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isInProgress: value, userId});
+export const setTotal = (totalPagesNumber) => ({type: SET_TOTAL_PAGES_COUNT, payload: {totalPagesNumber}});
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, payload: {currentPage}});
+export const setPreloadValue = (isFetching) => ({type: SET_PRELOADER, payload: {isFetching}});
+export const toggleFollowingProgress = (value, userId) => (
+    {type: TOGGLE_IS_FOLLOWING_PROGRESS, payload: {isInProgress: value, userId}});
 
 export const showUsers= (page, usersNumber = initialState.usersNumber) => {
     return async (dispatch) => {

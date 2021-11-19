@@ -17,28 +17,20 @@ const authReducer = (state = initialState, action) => {
 
     switch (type) {
         case SET_AUTH_DATA:
-            return {
-                ...state,
-                id: action.id,
-                login: action.login,
-                email: action.email,
-                isAuth: action.isAuth
-            }
         case SET_CAPTCHA:
             return {
                 ...state,
-                captcha: action.url,
-                isCaptcha: action.isCaptcha
+                ...action.payload
             }
         default:
             return state;
     }
 }
 
-export const setAuthData = (data, value) =>
-    ({type: SET_AUTH_DATA, id: data.id, login: data.login ? data.login : 'Guest', email: data.email, isAuth: value});
+export const setAuthData = ({id, login, email}, isAuth) =>
+    ({type: SET_AUTH_DATA, payload: {id, email, login: login || 'Guest', isAuth}});
 
-export const setIsCaptcha = (url, value) => ({type: SET_CAPTCHA, url, isCaptcha: value});
+export const setIsCaptcha = (captcha, isCaptcha) => ({type: SET_CAPTCHA, payload: {captcha, isCaptcha}});
 
 export const setCaptcha = (url) => {
     if (url.length > 0) return setIsCaptcha(url, true);
@@ -51,28 +43,24 @@ export const queryAuth = () => async (dispatch) => {
         else dispatch(setAuthData(data, false));
 }
 
-export const setUserAuth = (loginData, setErrors) => {
-    return async (dispatch) => {
-        const {resultCode, messages} = await loginAPI.postLoginData(`/auth/login`, loginData);
-        if (!resultCode) {
-            dispatch(setCaptcha(''));
-            dispatch(queryAuth());
-        } else if (resultCode === 10) {
-                const {url} = await loginAPI.getLoginData(`/security/get-captcha-url`);
-                dispatch(setCaptcha(url));
-        } else if (resultCode === 1) {
-            setErrors({email: messages});
-        }
+export const setUserAuth = (loginData, setErrors) => async (dispatch) => {
+    const {resultCode, messages} = await loginAPI.postLoginData(`/auth/login`, loginData);
+    if (!resultCode) {
+        dispatch(setCaptcha(''));
+        dispatch(queryAuth());
+    } else if (resultCode === 10) {
+            const {url} = await loginAPI.getLoginData(`/security/get-captcha-url`);
+            dispatch(setCaptcha(url));
+    } else if (resultCode === 1) {
+        setErrors({email: messages});
     }
 }
 
-export const deleteAuthLogin = () => {
-    debugger;
-    return (dispatch) => {
-        const {resultCode, messages} = loginAPI.deleteLoginData(`/auth/login`);
-        if (!resultCode) dispatch(setAuthData({}, false));
-        else console.log(`Something is wrong. Error ${resultCode}: `, messages[0]);
-    }
+export const deleteAuthLogin = () => dispatch => {
+    const {resultCode} = loginAPI.deleteLoginData(`/auth/login`);
+    if (!resultCode) dispatch(setAuthData({}, false));
+    // else console.log(`Something is wrong. Error ${resultCode}: `, messages[0]);
 }
+
 
 export default authReducer;

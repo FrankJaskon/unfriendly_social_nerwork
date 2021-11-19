@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorField from '../../common/error/error-field';
+import WarningField from '../../common/warning-field';
 import UserAbout from './user-about';
 import ProfileData from './user-about/profile-data';
 import UserNameWithStatus from './user-about/user-name-with-status';
@@ -7,13 +7,13 @@ import UserImg from './user-img';
 
 import s from './User.module.sass';
 
-const User = ({setServerResponse, saveNewUserPhoto, serverResponse,
+const User = ({setIsSuccessResponse, isSuccessResponse, setServerResponse, saveNewUserPhoto, serverResponse,
     saveUserInfoFormData, userId, aboutMe, contacts, lookingForAJob,
     lookingForAJobDescription, fullName, photo, isMyPage
 }) => {
     return (
         <div className={s.user}>
-            <ErrorField serverResponse={serverResponse} setServerResponse={setServerResponse} />
+            <WarningField hideFieldFunction={setServerResponse}>{serverResponse}</WarningField>
             <div className={s.userHeader}>
                 <UserImg
                     src={photo}
@@ -37,7 +37,9 @@ const User = ({setServerResponse, saveNewUserPhoto, serverResponse,
                 contacts={contacts}
                 isMyPage={isMyPage}
                 userId={userId}
-                serverResponse={serverResponse} />
+                serverResponse={serverResponse}
+                isSuccessResponse={isSuccessResponse}
+                setIsSuccessResponse={setIsSuccessResponse} />
         </div>
     )
 }

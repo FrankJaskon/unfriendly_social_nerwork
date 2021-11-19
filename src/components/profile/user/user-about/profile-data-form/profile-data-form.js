@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field, withFormik} from 'formik';
 import CustomButton from '../../../../common/buttons/submit/custom-button';
+import WarningField from '../../../../common/warning-field';
 // import {validateTextFieldCreator} from '../../../../common/validators';
 
 import s from '../UserAbout.module.sass';
@@ -58,6 +59,10 @@ const DataForm = React.memo(({onEscapeSetEditModeFalse, changeIsEditMode, contac
                 value={values.contacts[key]}
                 touched={touched}
                 errors={errors} />)}
+            {errors.serverResponse && <WarningField className={s.requestResponse}
+                filedStyle={s.filedStyle} >
+                {errors.serverResponse}
+            </WarningField>}
         <CustomButton wrapClassName={s.cancelWrapperStyle}
             type='button' callbackOnClick={() => changeIsEditMode(false)}>Cancel</CustomButton>
         <CustomButton wrapClassName={s.saveWrapperStyle} type='submit'>Save</CustomButton>
@@ -72,6 +77,7 @@ const FormContactField = React.memo(({contactKey, handleChange, handleBlur, valu
             <Field className={s.statusInput}
             // validate={validateTextFieldCreator(50)}
             name={`contacts.${contactKey}`}
+            placeholder={contactKey}
             id={contactKey}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -83,18 +89,16 @@ const FormContactField = React.memo(({contactKey, handleChange, handleBlur, valu
 
 const ProfileDataForm = withFormik({
     mapPropsToValues: ({fullName, lookingForAJob, lookingForAJobDescription, aboutMe, contacts}) => {
-
-    const newContacts = {};
-    Object.keys(contacts).map(key => newContacts[key] = contacts[key] || '');
-
-    return ({fullName,
-        lookingForAJob,
-        lookingForAJobDescription,
-        aboutMe,
-        contacts: {...newContacts}})},
-    handleSubmit: (values, {props: {saveUserInfoFormData, changeIsEditMode}}) => {
-        saveUserInfoFormData(values);
-        changeIsEditMode(false);
+        const newContacts = {};
+        Object.keys(contacts).map(key => newContacts[key] = contacts[key] || '');
+        return ({fullName,
+                lookingForAJob,
+                lookingForAJobDescription,
+                aboutMe,
+                contacts: {...newContacts}})
+    },
+    handleSubmit: (values, {setErrors, props: {saveUserInfoFormDataWithId}}) => {
+        saveUserInfoFormDataWithId(values, setErrors);
     },
     displayName: 'UserInfoForm'
 })(DataForm);

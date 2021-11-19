@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react';
-import MyPosts from './my-posts';
+// import MyPosts from './my-posts';
 import User from './user';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router';
 import HOC from '../common/hoc';
-import {getIsMyPage, getIsPageLoaded, getLoadingError, getProfile, getServerResponse} from '../../redux/profile-selectors';
 import {getIsAuth, getMyId} from '../../redux/auth-selectors';
-import {addPost, showUserPage, setLoadingError,
+import {getIsMyPage, getIsPageLoaded, getLoadingError,
+    getProfile, getServerResponse, getIsSuccessResponse} from '../../redux/profile-selectors';
+import {setIsSuccessResponse, addPost, showUserPage, setLoadingError,
     saveUserInfoFormData, setServerResponse, saveNewUserPhoto} from '../../redux/profile-reducer';
 // import ProfileImg from './profile-img';
 
 import s from './Profile.module.sass';
 import Preloader from '../common/preloader';
 
-const Profile = ({saveNewUserPhoto, serverResponse, setServerResponse,
+const Profile = ({setIsSuccessResponse, isSuccessResponse, saveNewUserPhoto, serverResponse, setServerResponse,
     profile: {postsData, newPostBody, placeholderText,
     aboutMe, contacts, lookingForAJob, lookingForAJobDescription,
     fullName, userId, photos: {large}},
     addPost, isAuth, isLoaded, isMyPage, showUserPage, saveUserInfoFormData,
     id, match: {params: {userId : urlId}}}) => {
-
 
     const pageId = urlId ? urlId : id;
 
@@ -47,14 +47,16 @@ const Profile = ({saveNewUserPhoto, serverResponse, setServerResponse,
                 saveUserInfoFormData={saveUserInfoFormData}
                 setServerResponse={setServerResponse}
                 serverResponse={serverResponse}
-                saveNewUserPhoto={saveNewUserPhoto} />
-            <MyPosts
+                saveNewUserPhoto={saveNewUserPhoto}
+                isSuccessResponse={isSuccessResponse}
+                setIsSuccessResponse={setIsSuccessResponse} />
+            {/* <MyPosts
                 postsData={postsData}
                 newPostBody={newPostBody}
                 placeholderText={placeholderText}
                 addPost={addPost}
                 isAuth={isAuth}
-                isMyPage={isMyPage} />
+                isMyPage={isMyPage} /> */}
             </>
         }
     </div>
@@ -67,12 +69,13 @@ const mapStateToProps = (state) => ({
     isLoaded: getIsPageLoaded(state),
     isMyPage: getIsMyPage(state),
     loadingError: getLoadingError(state),
-    serverResponse: getServerResponse(state)
+    serverResponse: getServerResponse(state),
+    isSuccessResponse: getIsSuccessResponse(state)
 });
 
 
 export default compose(
-    connect(mapStateToProps, {addPost, showUserPage, setLoadingError,
+    connect(mapStateToProps, {setIsSuccessResponse, addPost, showUserPage, setLoadingError,
         saveUserInfoFormData, setServerResponse, saveNewUserPhoto}),
     withRouter,
     HOC.showPageErrorWrapperComponent

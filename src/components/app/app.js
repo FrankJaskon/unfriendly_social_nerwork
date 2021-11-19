@@ -7,10 +7,10 @@ import HeaderContainer from '../header';
 import {initializeApp} from '../../redux/app-reducer';
 import Preloader from '../common/preloader';
 // import HOC from '../common/hoc';
-import News from '../news';
-import Music from '../music';
+// import News from '../news';
+// import Music from '../music';
+// import DialogsContainer from '../dialogs';
 import ProfileContainer from '../profile';
-import DialogsContainer from '../dialogs';
 import UsersContainer from '../users';
 import LoginContainer from '../login';
 import SettingsContainer from '../settings';
@@ -52,14 +52,14 @@ class App extends React.Component {
                         <Route
                             path='/profile/:userId?'
                             render={() => <ProfileContainer />} />
-                        <Route
+                        {/* <Route
                             path='/dialogs/'
-                            render={() => <DialogsContainer />} />
+                            render={() => <DialogsContainer />} /> */}
                         <Route
                             path='/users/'
                             render={() => <UsersContainer />} />
-                        <Route path='/news' component={News} />
-                        <Route path='/music' component={Music} />
+                        {/* <Route path='/news' component={News} />
+                        <Route path='/music' component={Music} /> */}
                         <Route
                             path='/settings'
                             render={() => <SettingsContainer />} />

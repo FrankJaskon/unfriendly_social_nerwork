@@ -23,8 +23,8 @@ const Login = ({setUserAuth, isCaptcha, captcha}) => {
             }
             if (password === '') {
                 errors.password = '* This field cannot be empty. Please, try better.';
-            } else if (password.length > 15) {
-                errors.password = `* It's too much symbols. Max length is ${15}`;
+            } else if (password.length > 20) {
+                errors.password = `* It's too much symbols. Max length is ${20}`;
             }
             return errors;
         }

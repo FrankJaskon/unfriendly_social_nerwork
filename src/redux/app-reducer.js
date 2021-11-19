@@ -13,14 +13,14 @@ const appReducer = (state = initialState, action) => {
         case SET_INITIALIZATION:
             return {
                 ...state,
-                initialized: action.initialized
+                ...action.payload
             }
         default:
             return state;
     }
 }
 
-export const setInitialization = (value) => ({type: SET_INITIALIZATION, initialized: value});
+export const setInitialization = (initialized) => ({type: SET_INITIALIZATION, payload: {initialized}});
 
 export const initializeApp = () => async (dispatch) => {
     await dispatch(queryAuth());

@@ -29,6 +29,10 @@ export const getServerResponse = ({profile: {serverResponse}}) => {
     return serverResponse;
 }
 
+export const getIsSuccessResponse = ({profile: {isSuccessResponse}}) => {
+    return isSuccessResponse;
+}
+
 export const getIsPageLoaded  = createSelector(getIsProfileLoaded, getIsStatusLoaded,
     (isProfileLoaded, isStatusLoaded) => {
         if (isProfileLoaded && isStatusLoaded) return true;
