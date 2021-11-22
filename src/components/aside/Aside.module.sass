@@ -1,11 +1,14 @@
-.aside
-    height: calc(100vmin - 50px - 2 * .65rem)
-    padding: 20px 2rem 20px 1rem
-    overflow: hidden
-    background: #25bdd8
-    border-radius: 3px
-    color: #fff
-    z-index: 15
+.additionalWrapper
+    position: relative
+    .aside
+        height: calc(100vh - 60px - .65rem)
+        padding: 20px 2rem 20px 1rem
+        overflow: hidden
+        background: #25bdd8
+        border-radius: 3px
+        color: #fff
+        transition: width .3s
+        z-index: 15
 .hamburgerMenuIcon
     display: none
 @media (max-Width: 991px)
@@ -13,16 +16,14 @@
         min-width: 100px
 @media (max-width: 767px)
     .additionalWrapper
-        position: relative
         .aside
             display: grid
             grid-template-columns: 55px 1fr
             position: absolute
             min-width: 55px
             width: 55px
-            height: calc(100vmax - 50px - .5rem)
+            height: calc(100vh - 50px - .5rem - .5rem)
             padding: 1rem 0
-            transition: width .3s
             .hamburgerMenuIcon
                 display: block
                 margin: 0 auto

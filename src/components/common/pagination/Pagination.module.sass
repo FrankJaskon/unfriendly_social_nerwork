@@ -4,6 +4,7 @@
     align-items: center
     justify-content: flex-end
     .buttonsGroup
+        // overflow: hidden
         display: flex
         align-items: center
         justify-content: center
@@ -14,9 +15,10 @@
             margin: 0 .25rem
         .wrapperTenStyle
             display: flex
-            height: 1rem
+            font-size: .5rem
             button
-                width: 2rem
+                // width: 2rem
+                padding: 0
                 background: none
                 color: #25bdd8
         .prevTenButtonStyle
@@ -82,10 +84,12 @@
             .wrapperStyle
                 width: auto
                 height: auto
+                margin: 0 1px
                 button
                     font-size: 1rem
             .wrapperTenStyle
                 height: auto
+                width: 1rem
                 button
                     font-size: 1rem
                     width: auto
@@ -93,7 +97,8 @@
             .nextTenButtonStyle
         .pageReferencesWrapper
             span
-                font-size: 1rem
+                font-size: .9rem
+                line-height: 1
             .dots
             .selectedPage
     .paginationWrapperBottom
@@ -102,6 +107,7 @@
                 .wrapperStyle
                     width: auto
                     height: auto
+                    margin: 0 2px
                     button
                         font-size: 1rem
                 .wrapperTenStyle

@@ -55,7 +55,6 @@ const Pagination = React.memo(({totalPagesNumber, usersNumber, paginatorTotalCou
 
     return <div className={isTop ? s.paginationWrapperTop : s.paginationWrapperBottom}>
         <div className={s.additionalWrapper}>
-
             {currentPage !== 1
                 ? <div className={s.buttonsGroup}>
                     {currentPage > 10
