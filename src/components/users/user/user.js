@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import otherUsersPhoto from '../../../assets/images/icon-default-other-users.png';
 import CustomButton from '../../common/buttons/submit/custom-button';
+import DivWrapper from '../../common/finished-components/div-wrapper/diw-wrapper';
 
 import s from './User.module.sass';
 
@@ -15,7 +16,7 @@ const User = ({isAuth, authId, userData: {name, id, followed, status, photos: {s
 
     return (
         <div className={s.userWrapper}>
-            <div className={s.userImgBtnWrapper} >
+            <DivWrapper className={s.userImgBtnWrapper} >
                 <NavLink to={`/profile/${id}`}>
                     <div className={s.userImgWrap}>
                         <img src={small ? small : otherUsersPhoto}  alt='user-icon'></img>
@@ -30,8 +31,8 @@ const User = ({isAuth, authId, userData: {name, id, followed, status, photos: {s
                         callbackOnClick={() => followed ? onClickButton(false) : onClickButton(true)} />
                     : null}
                 </div>
-            </div>
-            <div className={s.userDescriptionsWrapper}>
+            </DivWrapper>
+            <DivWrapper className={s.userDescriptionsWrapper}>
                 <div className={s.descriptionWrap}>
                     <div className={s.userNameAgeWrapper}>
                         <NavLink to={`/profile/${id}`} className={s.fullnameLink} >
@@ -45,7 +46,7 @@ const User = ({isAuth, authId, userData: {name, id, followed, status, photos: {s
                     <div className={s.userLocation}>
                     </div>
                 </div>
-            </div>
+            </DivWrapper>
         </div>
     )
 }

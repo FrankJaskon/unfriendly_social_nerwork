@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
-import {HashRouter, Route} from 'react-router-dom';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import AsideContainer from '../aside';
 import HeaderContainer from '../header';
 import {initializeApp} from '../../redux/app-reducer';
@@ -32,43 +32,61 @@ import s from './App.module.sass';
 // const Music = HOC.wrapComponentSuspense(
 //     React.lazy(() => import('../music')), <Preloader />);
 
-class App extends React.Component {
-    componentDidMount() {
-        this.props.initializeApp();
-    }
-    render() {
-        if (!this.props.initialized) return <Preloader preloaderClass={s.preloader}/>
 
-        return (
-            <div className={s.app}>
-                <div className={s.wrapper}>
-                    <HeaderContainer />
-                    <AsideContainer />
-                    <div className={s['app-wrapper-content']}>
+    // componentDidMount() {
+    //     this.props.initializeApp();
+    //     // window.addEventListener("unhandledrejection", function (event) {
+    //     //     console.warn("Внимание: Необработанная ошибка Promise. Позор вам! Причина: "
+    //     //                  + event.reason);
+    //     //   });
+    // }
+const App = ({initializeApp, initialized}) => {
+
+    useEffect(() => {
+        initializeApp();
+
+        window.addEventListener("unhandledrejection", ({reason: {response: {data: {message}}}}) => {
+            console.log(message);
+        });
+    }, [initializeApp]);
+
+    if (!initialized) {
+        return <Preloader preloaderClass={s.preloader}/>
+    }
+    return (
+        <div className={s.app}>
+            <div className={s.wrapper}>
+                <HeaderContainer />
+                <AsideContainer />
+                <div className={s['app-wrapper-content']}>
+                    <Switch>
                         <Route
-                            exact
-                            path={["/login", "/"]}
-                            render={() => <LoginContainer />} />
+                            path={["/login"]}
+                            component={LoginContainer} />
                         <Route
                             path='/profile/:userId?'
-                            render={() => <ProfileContainer />} />
+                            component={ProfileContainer} />
                         {/* <Route
                             path='/dialogs/'
-                            render={() => <DialogsContainer />} /> */}
+                            component={DialogsContainer} /> */}
                         <Route
                             path='/users/'
-                            render={() => <UsersContainer />} />
+                            component={UsersContainer} />
                         {/* <Route path='/news' component={News} />
                         <Route path='/music' component={Music} /> */}
                         <Route
                             path='/settings'
-                            render={() => <SettingsContainer />} />
-                    </div>
+                            component={SettingsContainer} />
+                        <Route
+                            path={["/"]}
+                            render={() => <Redirect to='/login' />} />
+                    </Switch>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
 
 const mapStateToProps = ({app: {initialized}}) => ({
     initialized
@@ -77,7 +95,6 @@ const mapStateToProps = ({app: {initialized}}) => ({
 const AppContainer = compose(
     connect(mapStateToProps, {initializeApp})
 )(App);
-
 
 const UnfriendlySocialNetworkApp = ({store}) => {
     return <React.StrictMode>

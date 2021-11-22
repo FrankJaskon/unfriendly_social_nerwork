@@ -1,16 +1,17 @@
 import React from 'react';
-import CustomButton from '../../../../common/buttons/submit/custom-button';
+import DivWrapper from '../../../../common/finished-components/div-wrapper';
 
 import s from '../UserAbout.module.sass';
 
 const ProfileData = ({title, lookingForAJob = null, lookingForAJobDescription,
-    aboutMe, contacts, changeIsEditMode, wrapperInfoClassName, itemInfoClass, contactsWrapperInfoClass}) => {
+    aboutMe, contacts, children, wrapperInfoClassName, itemInfoClass, contactsWrapperInfoClass}) => {
 
     let wrapperClass = `${s.user__about} ${wrapperInfoClassName}`;
     let itemClass = `${s['user__item-about']} ${itemInfoClass}`;
     let contactsWrapperClass = `${s['user__item-contact']} ${contactsWrapperInfoClass}`;
 
-    return <div className={wrapperClass}>
+    return <DivWrapper className={wrapperClass}>
+    {/* <div className={wrapperClass}> */}
             {title && <h3 className={s.user__title}><b>{title}</b></h3>}
             {lookingForAJob !== null && <p className={itemClass}><b>Working status:</b>
                 {lookingForAJob ? ' looking for' : ' not looking for'}</p>}
@@ -22,10 +23,9 @@ const ProfileData = ({title, lookingForAJob = null, lookingForAJobDescription,
                     ? <Contact key={key} contactKey={key} contactValue={contacts[key]}/>
                     :null)}
             </div>}
-            {changeIsEditMode && <CustomButton text='Change data'
-                wrapClassName={s.wrapperStyle}
-                callbackOnClick={() => changeIsEditMode(true)} />}
-        </div>
+            {children}
+        {/* </div> */}
+        </DivWrapper>
 }
 
 const Contact = ({contactKey, contactValue}) => {

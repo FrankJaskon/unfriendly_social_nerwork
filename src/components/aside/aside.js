@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Navbar from './navbar';
-import Friends from './friends';
+// import Friends from './friends';
 import {Squash as Hamburger} from 'hamburger-react'
 import {useMediaQuery} from 'react-responsive'
 
@@ -45,7 +45,8 @@ const Aside = ({navbar, friends, isAuth}) => {
                     : null}
                 <div className={s.navbarFriendsWrapper} >
                     <Navbar navbar={navbar} onClickMenuItem={closeAside} />
-                    {isAuth ? <Friends friendsData={friends} /> : ''}</div>
+                    {/* {isAuth ? <Friends friendsData={friends} /> : ''} */}
+                </div>
             </aside>
         </div>
     )

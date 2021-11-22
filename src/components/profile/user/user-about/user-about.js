@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react';
+import CustomButton from '../../../common/buttons/submit';
 import {stopChangingOnEscape} from '../../../common/helpers';
 import ProfileData from './profile-data';
 import ProfileDataForm from './profile-data-form';
 
-// import s from './UserAbout.module.sass';
+import s from './UserAbout.module.sass';
 
 const UserAbout = (props) => {
 
+    const {isMyPage, saveUserInfoFormData, setIsSuccessResponse,
+        isSuccessResponse, lookingForAJob, lookingForAJobDescription} = props;
+
     const [isEditMode, setIsEditMode] = useState(false);
-    const {setIsSuccessResponse, isSuccessResponse, lookingForAJob, lookingForAJobDescription} = props;
 
     useEffect(() => {
         if (isSuccessResponse) {
@@ -18,27 +21,27 @@ const UserAbout = (props) => {
         };
     }, [isSuccessResponse, setIsSuccessResponse]);
 
-    const changeIsEditMode = (value) => {
-        setIsEditMode(value);
-    }
-
     const onEscapeSetEditModeFalse = (event) => {
-        stopChangingOnEscape(event, isEditMode, changeIsEditMode);
+        stopChangingOnEscape(event, isEditMode, setIsEditMode);
     }
 
     const saveUserInfoFormDataWithId = (data, setErrors) => {
-        props.saveUserInfoFormData({...data, userId : props.userId}, setErrors);
+        saveUserInfoFormData({...data, userId : props.userId}, setErrors);
     }
 
     return !isEditMode
                 ? <ProfileData lookingForAJob={lookingForAJob}
                     lookingForAJobDescription={lookingForAJobDescription}
-                    changeIsEditMode={changeIsEditMode}
-                    title='Professional info' />
+                    setIsEditMode={setIsEditMode}
+                    title='Professional info'>
+                        {isMyPage && <CustomButton text='Change data'
+                            wrapClassName={s.wrapperStyle}
+                            callbackOnClick={() => setIsEditMode(true)} />}
+                </ProfileData>
                 : <ProfileDataForm {...props}
                     saveUserInfoFormDataWithId={saveUserInfoFormDataWithId}
                     onEscapeSetEditModeFalse={onEscapeSetEditModeFalse}
-                    changeIsEditMode={changeIsEditMode} />
+                    setIsEditMode={setIsEditMode} />
 }
 
 export default UserAbout;

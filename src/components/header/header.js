@@ -9,9 +9,9 @@ const Header = ({header: {login, isAuth}}) => {
         <header className={s.header}>
             <div className={s.headerTitleWrapper}>
                 <h1 className={s.headerMainTitle}>
-                    <div>Hello,
+                    <div>{'Hello, '}
                         <NavLink to={'/profile'}>
-                            <span className={s.userName}> {login}.</span>
+                            <span className={s.userName}>{login}.</span>
                         </NavLink> {
                         isAuth
                             ? <span className={s.additionalTitleContent}>This is the place where you aren't expected.</span>

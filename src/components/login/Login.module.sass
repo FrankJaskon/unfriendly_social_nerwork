@@ -5,8 +5,8 @@
     .loginForm
         position: relative
         top: 5rem
-        max-width: 800px
-        margin: 0 auto
+        // max-width: 800px
+        margin: 0 5rem
         padding: 1rem 1rem 0 1rem
         border-radius: .5rem
         border: 3px solid #87dae97e
@@ -39,8 +39,8 @@
 .btnStyle
     font-size: 1.05rem
 .wrapperStyle
-    height: 40px
-    width: 120px
+    height: 2.5rem
+    width: 10rem
     margin: 1rem auto 2rem
 .error
     padding-top: .5rem
@@ -48,5 +48,8 @@
 @media (max-width: 768px)
     .loginPage
         height: calc(100vmax - 50px - .5rem)
+@media (max-width: 450px)
+    .loginPage
         .loginForm
-            margin: 0 2rem 0 0
+            top: 2rem
+            margin: 0 2rem

@@ -2,16 +2,19 @@ import React from 'react';
 import {Field, withFormik} from 'formik';
 import CustomButton from '../../../../common/buttons/submit/custom-button';
 import WarningField from '../../../../common/warning-field';
+import DivWrapper from '../../../../common/finished-components/div-wrapper';
 // import {validateTextFieldCreator} from '../../../../common/validators';
 
 import s from '../UserAbout.module.sass';
 
 const checkbox = `${s.statusInput} ${s.checkbox}`;
 
-const DataForm = React.memo(({onEscapeSetEditModeFalse, changeIsEditMode, contacts,
+const DataForm = React.memo(({onEscapeSetEditModeFalse, setIsEditMode, contacts,
     values, touched, errors, handleChange, handleBlur, handleSubmit}) => {
 
-    return <form className={s.userInfoForm} onSubmit={handleSubmit} onKeyDown={(e) => onEscapeSetEditModeFalse(e)}>
+    return <form onSubmit={handleSubmit} onKeyDown={(e) => onEscapeSetEditModeFalse(e)}>
+        <DivWrapper className={s.userInfoForm}>
+    {/* return <form className={s.userInfoForm} onSubmit={handleSubmit} onKeyDown={(e) => onEscapeSetEditModeFalse(e)}> */}
         <h3 className={s.user__title}>User about</h3>
         <div className={s.user__description}>
             <label name='fullName' className={s['user__item-about']}>Full name:</label>
@@ -64,9 +67,10 @@ const DataForm = React.memo(({onEscapeSetEditModeFalse, changeIsEditMode, contac
                 {errors.serverResponse}
             </WarningField>}
         <CustomButton wrapClassName={s.cancelWrapperStyle}
-            type='button' callbackOnClick={() => changeIsEditMode(false)}>Cancel</CustomButton>
+            type='button' callbackOnClick={() => setIsEditMode(false)}>Cancel</CustomButton>
         <CustomButton wrapClassName={s.saveWrapperStyle} type='submit'>Save</CustomButton>
         </div>
+        </DivWrapper>
     </form>
 });
 
