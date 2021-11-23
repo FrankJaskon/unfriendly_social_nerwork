@@ -29,10 +29,8 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthData = ({id, login, email}, isAuth) =>
     ({type: SET_AUTH_DATA, payload: {id, email, login: login || 'Guest', isAuth}});
-
 export const setIsCaptcha = (captcha, isCaptcha) => ({type: SET_CAPTCHA, payload: {captcha, isCaptcha}});
-
-export const setCaptcha = (url) => {
+export const setCaptcha = url => {
     if (url.length > 0) return setIsCaptcha(url, true);
     else return setIsCaptcha(url, false);
 }

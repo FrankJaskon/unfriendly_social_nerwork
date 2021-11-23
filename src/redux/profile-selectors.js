@@ -25,10 +25,6 @@ export const getLoadingError = ({profile: {loadingError}}) => {
     return loadingError;
 }
 
-export const getServerResponse = ({profile: {serverResponse}}) => {
-    return serverResponse;
-}
-
 export const getIsSuccessResponse = ({profile: {isSuccessResponse}}) => {
     return isSuccessResponse;
 }

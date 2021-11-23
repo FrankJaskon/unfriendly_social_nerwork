@@ -1,4 +1,5 @@
 import {getPage, profileAPI, putData} from '../components/api/api';
+import {setResponseWarning} from './app-reducer';
 
 const ADD_POST = 'unfriendly-network/profile/ADD-POST',
       SET_USER_PROFILE = 'unfriendly-network/profile/SET-USER-PROFILE',
@@ -6,7 +7,6 @@ const ADD_POST = 'unfriendly-network/profile/ADD-POST',
       SET_IS_PROFILE_LOADED = 'unfriendly-network/profile/SET-IS-PROFILE-LOADED',
       SET_IS_STATUS_LOADED = 'unfriendly-network/profile/SET-IS-STATUS-LOADED',
       SET_LOADING_ERROR = 'unfriendly-network/profile/SET-LOADING-ERROR',
-      SET_SERVER_RESPONSE = 'unfriendly-network/profile/SET-SERVER-RESPONSE',
       SET_IS_SUCCESS_RESPONSE = 'unfriendly-network/profile/SET-IS-SUCCESS-RESPONSE';
 
 const initialState = {
@@ -35,7 +35,6 @@ const initialState = {
         code: '',
         message: ''
     },
-    serverResponse: '',
     isSuccessResponse: false
 };
 
@@ -64,7 +63,6 @@ const profileReducer = (state = initialState, action) => {
         case SET_PROFILE_STATUS:
         case SET_IS_PROFILE_LOADED:
         case SET_IS_STATUS_LOADED:
-        case SET_SERVER_RESPONSE:
         case SET_IS_SUCCESS_RESPONSE:
             return {
                 ...state,
@@ -90,7 +88,6 @@ export const changeUserStatus = (status) => ({type: SET_PROFILE_STATUS, payload:
 export const setIsProfileLoaded = (isProfileLoaded) => ({type: SET_IS_PROFILE_LOADED, payload: {isProfileLoaded}});
 export const setIsStatusLoaded = (isStatusLoaded) => ({type: SET_IS_STATUS_LOADED, payload: {isStatusLoaded}});
 export const setLoadingError = (code, message) => ({type: SET_LOADING_ERROR, payload: {code, message}});
-export const setServerResponse = (serverResponse) => ({type: SET_SERVER_RESPONSE, payload: {serverResponse}});
 export const setIsSuccessResponse = (isSuccessResponse) => ({type: SET_IS_SUCCESS_RESPONSE, payload: {isSuccessResponse}});
 
 export const showUserPage = userId => async dispatch => {
@@ -113,7 +110,7 @@ export const applyNewStatus = body => async dispatch => {
     const {resultCode, messages} = await putData(`profile/status/`, {status: body});
     if (!resultCode) {
         dispatch(changeUserStatus(body));
-    } else dispatch(setServerResponse(`Some error: ${messages[0]}`));
+    } else dispatch(setResponseWarning(`Some error: ${messages[0]}`));
 }
 
 export const saveUserInfoFormData = (data, setErrors) => async (dispatch, getState) => {
@@ -122,7 +119,7 @@ export const saveUserInfoFormData = (data, setErrors) => async (dispatch, getSta
     if (!resultCode) {
         dispatch(setIsSuccessResponse(true));
         dispatch(showUserPage(id));
-    } else setErrors({serverResponse: `Some error:${messages.map(message => ' ' + message)}`});
+    } else setErrors({responseWarning: `Some error:${messages.join(' ')}`});
 }
 
 export const saveNewUserPhoto = file => async (dispatch, getState) => {
@@ -130,7 +127,7 @@ export const saveNewUserPhoto = file => async (dispatch, getState) => {
     const {resultCode, messages} = await profileAPI.updateUserImg('/profile/photo', file);
     if (!resultCode) {
         dispatch(showUserPage(id));
-    } else dispatch(setServerResponse(`Some error: ${messages[0]}`));
+    } else dispatch(setResponseWarning(`Some error: ${messages[0]}`));
 }
 
 export default profileReducer;

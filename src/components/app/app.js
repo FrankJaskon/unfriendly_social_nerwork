@@ -4,7 +4,6 @@ import {compose} from 'redux';
 import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import AsideContainer from '../aside';
 import HeaderContainer from '../header';
-import {initializeApp} from '../../redux/app-reducer';
 import Preloader from '../common/preloader';
 // import HOC from '../common/hoc';
 // import News from '../news';
@@ -14,6 +13,9 @@ import ProfileContainer from '../profile';
 import UsersContainer from '../users';
 import LoginContainer from '../login';
 import SettingsContainer from '../settings';
+import WarningField from '../common/warning-field';
+import {initializeApp, setResponseWarning} from '../../redux/app-reducer';
+import {getInitialized, getResponseWarning} from '../../redux/app-selectors';
 
 import s from './App.module.sass';
 
@@ -40,15 +42,16 @@ import s from './App.module.sass';
     //     //                  + event.reason);
     //     //   });
     // }
-const App = ({initializeApp, initialized}) => {
+const App = ({initializeApp, initialized, responseWarning, setResponseWarning}) => {
 
     useEffect(() => {
         initializeApp();
 
         window.addEventListener("unhandledrejection", ({reason: {response: {data: {message}}}}) => {
-            console.log(message);
+            setResponseWarning(message);
         });
-    }, [initializeApp]);
+    }, [initializeApp, setResponseWarning]);
+
 
     if (!initialized) {
         return <Preloader preloaderClass={s.preloader}/>
@@ -59,6 +62,10 @@ const App = ({initializeApp, initialized}) => {
                 <HeaderContainer />
                 <AsideContainer />
                 <div className={s['app-wrapper-content']}>
+                    {/* <WarningField hideFieldFunction={setResponseWarning}>{responseWarning}</WarningField> */}
+                    <WarningField hideFieldFunction={setResponseWarning} filedStyle={s.warningField}>
+                        {responseWarning}
+                    </WarningField>
                     <Switch>
                         <Route
                             path={["/login"]}
@@ -88,12 +95,13 @@ const App = ({initializeApp, initialized}) => {
 }
 
 
-const mapStateToProps = ({app: {initialized}}) => ({
-    initialized
+const mapStateToProps = (state) => ({
+    initialized: getInitialized(state),
+    responseWarning: getResponseWarning(state)
 });
 
 const AppContainer = compose(
-    connect(mapStateToProps, {initializeApp})
+    connect(mapStateToProps, {initializeApp, setResponseWarning})
 )(App);
 
 const UnfriendlySocialNetworkApp = ({store}) => {

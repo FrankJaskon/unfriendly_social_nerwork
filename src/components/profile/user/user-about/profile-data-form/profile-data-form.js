@@ -62,9 +62,8 @@ const DataForm = React.memo(({onEscapeSetEditModeFalse, setIsEditMode, contacts,
                 value={values.contacts[key]}
                 touched={touched}
                 errors={errors} />)}
-            {errors.serverResponse && <WarningField className={s.requestResponse}
-                filedStyle={s.filedStyle} >
-                {errors.serverResponse}
+            {errors.responseWarning && <WarningField className={s.requestResponse} filedStyle={s.filedStyle}>
+                {errors.responseWarning}
             </WarningField>}
         <CustomButton wrapClassName={s.cancelWrapperStyle}
             type='button' callbackOnClick={() => setIsEditMode(false)}>Cancel</CustomButton>

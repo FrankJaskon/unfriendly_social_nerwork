@@ -6,13 +6,14 @@ import {validateTextFieldCreator} from '../../common/validators';
 import {applyNewStatus} from '../../../redux/profile-reducer';
 import {stopChangingOnEscape} from '../../common/helpers';
 import CustomButton from '../../common/buttons/submit/custom-button';
+import TwoButtons from '../../common/buttons/two-buttons';
 
 import s from './Status.module.sass';
 
 
 const maxLength = validateTextFieldCreator(300);
 
-const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus, setServerResponse}) => {
+const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus, setResponseWarning}) => {
 
     const [editMode, setEditMode] = useState(false);
     const [statusBody, setStatusBody] = useState(status);
@@ -37,8 +38,13 @@ const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus, setServerRe
             if (statusBody !== status) {
                 setEditMode(false);
                 applyNewStatus(statusBody);
-                } else setServerResponse('Oops, some problem. New status cannot equal the old status');
-            } else alert(error);
+            } else setResponseWarning('Oops, some problem. New status cannot equal the old status');
+        } else alert(error);
+    }
+
+        const onCancelChange = () => {
+            setStatusBody(status);
+            setEditMode(false)
         }
 
         return <form className={s.statusForm} onSubmit={onSetNewStatus}>
@@ -49,7 +55,7 @@ const ProfileStatus = React.memo(({status, isMyPage, applyNewStatus, setServerRe
                             value={statusBody}
                             onKeyDown={(e) => stopChangingOnEscape(e, editMode, setEditMode)}
                             onChange={onChangeInput} ></input>
-                        <CustomButton wrapClassName={s.wrapperStyle}>Save new status</CustomButton></>
+                        <TwoButtons wrapClassName={s.wrapperStyle} onCancel={onCancelChange}/></>
                     : <><div className={s.statusField}
                             onDoubleClick={onClickEditMode}>{status ? status : 'User has no status'}</div>
                         {isMyPage && <CustomButton wrapClassName={s.wrapperStyle} type='button'

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import imgSrc from '../../../../assets/images/error400.png';
 
 import s from './ErrorPage.module.sass';
 
-const ErrorPage = ({loadingError: {code, message}}) => {
+const ErrorPage = ({setResponseWarning, responseWarning, loadingError: {code, message}}) => {
+
+    useEffect(() => {
+        if (setResponseWarning) setResponseWarning('');
+    }, [setResponseWarning, responseWarning]);
+
     return <div className={s.mainWrapper}>
         <div className={s.additionalWrapper1}>
             <div className={s.additionalWrapper2}>

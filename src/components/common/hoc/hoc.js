@@ -2,8 +2,9 @@ import React, {Suspense} from 'react'
 import {Redirect} from 'react-router'
 import {connect} from 'react-redux';
 import ErrorPage from '../error/error-page';
+import {getIsAuth} from '../../../redux/auth-selectors';
 
-const mapStateToPropsForRedirect= ({auth: {isAuth}}) => ({isAuth});
+const mapStateToPropsForRedirect= (state) => ({isAuth: getIsAuth(state)});
 
 const HOC = {
     redirectAuthWrapperComponent(Component) {
@@ -41,7 +42,9 @@ const HOC = {
             render() {
                 const {loadingError} = this.props;
 
-                if (loadingError.code) return <ErrorPage loadingError={loadingError} />
+                if (loadingError.code) return <ErrorPage loadingError={loadingError}
+                                                         responseWarning={this.props.responseWarning}
+                                                         setResponseWarning={this.props.setResponseWarning} />
                 else return <Component {...this.props} />;
             }
         }
