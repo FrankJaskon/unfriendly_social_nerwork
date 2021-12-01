@@ -7,11 +7,7 @@ const initialState = {
         // {id: 4, title: 'Music', url: '/music'},
         {id: 5, title: 'Settings', url: '/settings'}
     ],
-    friends: [
-        {id: 0, name: 'Irene'},
-        {id: 1, name: 'Dmitriy'},
-        {id: 2, name: 'Mark'}
-    ]
+    friends: []
 };
 
 const asideReducer = (state = initialState, action) => {
