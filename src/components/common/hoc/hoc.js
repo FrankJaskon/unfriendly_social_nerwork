@@ -37,12 +37,12 @@ const HOC = {
                 }
             }
             componentWillUnmount() {
-                this.props.loadingError.code && this.props.setLoadingError('', '');
+                this.props.loadingError && this.props.loadingError.code && this.props.setLoadingError('', '');
             }
             render() {
                 const {loadingError} = this.props;
 
-                if (loadingError.code) return <ErrorPage loadingError={loadingError}
+                if (loadingError && loadingError.code) return <ErrorPage loadingError={loadingError}
                                                          responseWarning={this.props.responseWarning}
                                                          setResponseWarning={this.props.setResponseWarning} />
                 else return <Component {...this.props} />;

@@ -1,4 +1,5 @@
 import {getPage, usersAPI} from '../components/api/api';
+import {setLoadingError} from './profile-reducer';
 
 const TOGGLE_FOLLOWING_STATUS = 'unfriendly-network/users/TOGGLE-FOLLOWING-STATUS',
       SET_USERS = 'unfriendly-network/users/SET-USERS',
@@ -75,11 +76,15 @@ export const toggleFollowingProgress = (value, userId) => (
 export const showUsers= (page, usersNumber = initialState.usersNumber) => {
     return async (dispatch) => {
         dispatch(setPreloadValue(true));
-        const {items, totalCount} = await getPage(`users?count=${usersNumber}&page=${page}`);
-        dispatch(setPreloadValue(false));
-        dispatch(setUsers(items));
-        dispatch(setTotal(totalCount));
-        dispatch(setCurrentPage(page));
+        try {
+            const {items, totalCount} = await getPage(`users?count=${usersNumber}&page=${page}`);
+            dispatch(setPreloadValue(false));
+            dispatch(setUsers(items));
+            dispatch(setTotal(totalCount));
+            dispatch(setCurrentPage(page));
+        } catch({response: {status, data: {message}}}) {
+            dispatch(setLoadingError(status, message));
+        }
     };
 }
 

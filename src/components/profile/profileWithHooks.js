@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import MyPosts from './my-posts';
+import MyPosts from './my-posts';
 import User from './user';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
@@ -53,13 +53,14 @@ const Profile = ({setIsSuccessResponse,
                 saveNewUserPhoto={saveNewUserPhoto}
                 isSuccessResponse={isSuccessResponse}
                 setIsSuccessResponse={setIsSuccessResponse} />
-            {/* <MyPosts
+            <MyPosts
+                userId={userId}
                 postsData={postsData}
                 newPostBody={newPostBody}
                 placeholderText={placeholderText}
                 addPost={addPost}
                 isAuth={isAuth}
-                isMyPage={isMyPage} /> */}
+                isMyPage={isMyPage} />
             </>
         }
     </div>

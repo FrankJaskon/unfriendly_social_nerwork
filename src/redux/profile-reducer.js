@@ -21,13 +21,7 @@ const initialState = {
         small: '',
         large: ''
     },
-    postsData: [
-        {id: 0, message: `Hello, retard. You aren't welcome here.`, likesCount: 12},
-        {id: 1, message: `If you are walking the first it's mean that everybody is walking behind.`, likesCount: 10},
-        {id: 2, message: `There will be everything but not immediately.`, likesCount: 101},
-        {id: 3, message: `When I was child the gods were happy and smiled to me. But after I became older and started working. That was the end of our friendship. They dont laugh any more and I'm as well.`, likesCount: 120},
-        {id: 4, message: `I'm so happy to be here`, likesCount: 11}
-    ],
+    postsData: [],
     placeholderText: 'Enter your message',
     isProfileLoaded: false,
     isStatusLoaded: false,
@@ -44,8 +38,9 @@ const profileReducer = (state = initialState, action) => {
     switch(type) {
         case ADD_POST:
             const newPost = {
-                id: 5,
+                id: 0,
                 message: action.newPostBody,
+                pageId: action.pageId,
                 likesCount: 0
             }
             return {
@@ -83,7 +78,7 @@ export const setProfile = ({status, aboutMe, contacts, lookingForAJob,
         {type: SET_USER_PROFILE, payload: {status, aboutMe, contacts, error,
             lookingForAJob, lookingForAJobDescription, fullName, userId, photos}}
     );
-export const addPost = (body) => ({type: ADD_POST, newPostBody: body});
+export const addPost = (body, pageId) => ({type: ADD_POST, newPostBody: body, pageId});
 export const changeUserStatus = (status) => ({type: SET_PROFILE_STATUS, payload: {status}});
 export const setIsProfileLoaded = (isProfileLoaded) => ({type: SET_IS_PROFILE_LOADED, payload: {isProfileLoaded}});
 export const setIsStatusLoaded = (isStatusLoaded) => ({type: SET_IS_STATUS_LOADED, payload: {isStatusLoaded}});

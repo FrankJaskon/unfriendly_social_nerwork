@@ -34,21 +34,13 @@ import s from './App.module.sass';
 // const Music = HOC.wrapComponentSuspense(
 //     React.lazy(() => import('../music')), <Preloader />);
 
-
-    // componentDidMount() {
-    //     this.props.initializeApp();
-    //     // window.addEventListener("unhandledrejection", function (event) {
-    //     //     console.warn("Внимание: Необработанная ошибка Promise. Позор вам! Причина: "
-    //     //                  + event.reason);
-    //     //   });
-    // }
 const App = ({initializeApp, initialized, responseWarning, setResponseWarning}) => {
 
     useEffect(() => {
         initializeApp();
 
         window.addEventListener("unhandledrejection", ({reason: {response: {data: {message}}}}) => {
-            setResponseWarning(message);
+            message && setResponseWarning(message);
         });
     }, [initializeApp, setResponseWarning]);
 
@@ -62,7 +54,6 @@ const App = ({initializeApp, initialized, responseWarning, setResponseWarning}) 
                 <HeaderContainer />
                 <AsideContainer />
                 <div className={s['app-wrapper-content']}>
-                    {/* <WarningField hideFieldFunction={setResponseWarning}>{responseWarning}</WarningField> */}
                     <WarningField hideFieldFunction={setResponseWarning} filedStyle={s.warningField}>
                         {responseWarning}
                     </WarningField>

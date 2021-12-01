@@ -4,8 +4,16 @@ import Preloader from '../common/preloader';
 import Pagination from '../common/pagination';
 import {useMediaQuery} from 'react-responsive';
 import DivWrapper from '../common/finished-components/div-wrapper';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import HOC from '../common/hoc';
+import {setLoadingError} from '../../redux/profile-reducer';
+import {setResponseWarning} from '../../redux/app-reducer';
+import {withRouter} from 'react-router';
+import {getResponseWarning} from '../../redux/app-selectors';
 
 import s from './Users.module.sass';
+import { getLoadingError } from '../../redux/profile-selectors';
 
 const Users = ({isAuth, authId, usersList, usersNumber, totalPagesNumber, currentPage,
     showNextPage, showNextTenPage, showPrevPage, showPrevTenPage, showNumberPage,
@@ -22,7 +30,6 @@ const Users = ({isAuth, authId, usersList, usersNumber, totalPagesNumber, curren
 
     return (
         <div className={s.users}>
-            {/* <h3 className={s.usersPageTitle}>Users */}
             <DivWrapper className={s.usersPageTitle}>Users
                 <Pagination totalPagesNumber={totalPagesNumber}
                     usersNumber={usersNumber}
@@ -55,4 +62,13 @@ const Users = ({isAuth, authId, usersList, usersNumber, totalPagesNumber, curren
     )
 }
 
-export default Users;
+const mapStateToProps = (state) => ({
+    loadingError: getLoadingError(state),
+    responseWarning: getResponseWarning(state)
+});
+
+export default compose(
+    connect(mapStateToProps, {setLoadingError, setResponseWarning}),
+    withRouter,
+    HOC.showPageErrorWrapperComponent
+)(Users);

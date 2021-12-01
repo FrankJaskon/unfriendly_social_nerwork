@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import imgSrc from '../../../../assets/images/error400.png';
 
 import s from './ErrorPage.module.sass';
 
-const ErrorPage = ({setResponseWarning, responseWarning, loadingError: {code, message}}) => {
+const ErrorPage = ({setResponseWarning, responseWarning,
+    loadingError: {code = 'none', message = 'Sorry. There is some error'}}) => {
 
     useEffect(() => {
         if (setResponseWarning) setResponseWarning('');
