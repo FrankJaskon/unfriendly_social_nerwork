@@ -9,11 +9,14 @@
         .nav-list__link
             text-decoration: none
             color: inherit
+            transition: color .3s
             &.active_link
                 color: #000
         &:last-child
-            color: #333
+            color: #fff
             margin-top: 40px
+            &:hover
+                color: #333
 
 @media (max-width: 768px)
     .nav-list

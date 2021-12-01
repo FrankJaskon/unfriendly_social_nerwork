@@ -17,7 +17,7 @@ const Navbar = ({navbar, onClickMenuItem}) => {
     });
     navigation.push(
         <li key={'visitMe'} className={s['nav-list__item']}>
-            <NavLink to='profile/20088'
+            <NavLink to='/profile/20088'
                 className={s['nav-list__link']}
                 activeClassName={s.active_link}
                 onClick={() => onClickMenuItem()} >
