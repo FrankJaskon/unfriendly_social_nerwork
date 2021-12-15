@@ -1,4 +1,5 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import thunkMiddleWare from 'redux-thunk';
 import asideReducer from './aside-reducer';
 import authReducer from './auth-reducer';
 import dialogsReducer from './dialogs-reducer';
@@ -6,7 +7,6 @@ import profileReducer from './profile-reducer';
 import usersReducer from './users-reducer';
 import settingsReducer from './settings-reducer';
 import appReducer from './app-reducer';
-import thunkMiddleWare from 'redux-thunk';
 
 const reducers = combineReducers({
     auth: authReducer,
