@@ -1,2 +1,2 @@
-import UsersContainer from './users-container';
-export default UsersContainer;
+import Users from './users';
+export default Users;
