@@ -1,2 +1,2 @@
-import AsideContainer from './aside-container';
-export default AsideContainer;
+import Aside from './aside';
+export default Aside;

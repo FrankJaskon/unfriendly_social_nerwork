@@ -5,8 +5,9 @@ import {Squash as Hamburger} from 'hamburger-react'
 import {useMediaQuery} from 'react-responsive'
 
 import s from './Aside.module.sass';
+import { connect } from 'react-redux';
 
-const Aside = ({navbar, friends, isAuth}) => {
+const Aside = ({navbar, friends, isAuth, id}) => {
 
     const isMobile = useMediaQuery({maxWidth: 767});
 
@@ -44,7 +45,7 @@ const Aside = ({navbar, friends, isAuth}) => {
                     </div>
                     : null}
                 <div className={s.navbarFriendsWrapper} >
-                    <Navbar navbar={navbar} onClickMenuItem={closeAside} />
+                    <Navbar navbar={navbar} onClickMenuItem={closeAside} userId={id}/>
                     {/* {isAuth ? <Friends friendsData={friends} /> : ''} */}
                 </div>
             </aside>
@@ -52,4 +53,6 @@ const Aside = ({navbar, friends, isAuth}) => {
     )
 }
 
-export default Aside;
+const mapStateToProps = ({aside: {navbar, friends}, auth: {isAuth, id}}) => ({navbar, friends, isAuth, id});
+
+export default connect(mapStateToProps, {})(Aside);

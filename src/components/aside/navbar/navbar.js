@@ -4,9 +4,9 @@ import {NavLink} from 'react-router-dom';
 
 import s from './Navbar.module.sass';
 
-const Navbar = ({navbar, onClickMenuItem}) => {
-    const navigation = navbar.map(page => {
-        return <li key={page.id} className={s['nav-list__item']}>
+const Navbar = ({navbar, onClickMenuItem, userId}) => {
+    const navigation = navbar.map(page => (
+        <li key={page.id} className={s['nav-list__item']}>
             <NavLink to={`${page.url}`}
                 className={s['nav-list__link']}
                 activeClassName={s.active_link}
@@ -14,8 +14,8 @@ const Navbar = ({navbar, onClickMenuItem}) => {
                 {page.title}
             </NavLink>
         </li>
-    });
-    navigation.push(
+    ));
+    (+userId !== 20088) && navigation.push(
         <li key={'visitMe'} className={s['nav-list__item']}>
             <NavLink to='/profile/20088'
                 className={s['nav-list__link']}

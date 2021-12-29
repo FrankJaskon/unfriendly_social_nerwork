@@ -29,7 +29,7 @@ const Profile = ({setIsSuccessResponse,
 
     useEffect(() => {
         if (pageId) showUserPage(pageId);
-        return setResponseWarning('');
+        return () => setResponseWarning('');
     }, [pageId, showUserPage, setResponseWarning]);
 
     if (!pageId) return <Redirect to='/login' />;

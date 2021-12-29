@@ -1,25 +1,17 @@
 import {createSelector} from 'reselect';
 
-export const getMyId = ({auth: {id}}) => {
-    return id;
-}
+export const getMyIdSelector = ({auth: {id}}) => id;
 
-export const getIsAuthSelector = state => {
-    const {auth: {isAuth}} = state;
-    return isAuth;
-}
+export const getIsAuthSelector = ({auth: {isAuth}}) => isAuth;
 
-export const getIsAuth = createSelector(getIsAuthSelector,
-    (isAuth) => {
-    return isAuth;
-});
+export const getIsCaptchaSelector = ({auth: {isCaptcha}}) => isCaptcha;
 
-export const getIsCaptcha = state => {
-    const {auth: {isCaptcha}} = state;
-    return isCaptcha;
-}
+export const getCaptchaSelector = ({auth: {captcha}}) => captcha;
 
-export const getCaptcha = state => {
-    const {auth: {captcha}} = state;
-    return captcha;
-}
+export const getMyId = createSelector([getMyIdSelector], id => id);
+
+export const getIsAuth = createSelector([getIsAuthSelector], isAuth => isAuth);
+
+export const getIsCaptcha = createSelector([getIsCaptchaSelector], isCaptcha => isCaptcha);
+
+export const getCaptcha = createSelector([getCaptchaSelector], captcha => captcha);

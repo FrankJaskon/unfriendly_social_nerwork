@@ -5,12 +5,14 @@ const SET_INITIALIZATION = 'unfriendly-network/app/SET-INITIALIZATION',
     SET_TIMER_ID = 'unfriendly-network/app/SET-TIMER-ID';
 
 const initialState = {
-    initialized: false,
-    responseWarning: '',
-    timerId: null
+    initialized: false as boolean,
+    responseWarning: null as null | string,
+    timerId: null as null | number
 };
 
-const appReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const appReducer = (state = initialState, action: any): InitialStateType => {
     const type = action.type;
 
     switch (type) {
@@ -26,27 +28,33 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
-export const setInitialization = initialized => ({type: SET_INITIALIZATION, payload: {initialized}});
-export const setWarning = responseWarning => ({type: SET_SERVER_RESPONSE, payload: {responseWarning}});
-export const setTimerId = timerId => ({type: SET_TIMER_ID, payload: {timerId}});
+export const SetInitializationActionType = (initialized: boolean) => Object;
+export const SetInitializationPayloadType = {
+    type: typeof SET_INITIALIZATION,
+    payload:
+}
 
-export const initializeApp = () => async dispatch => {
+export const setInitialization = (initialized: boolean) => ({type: SET_INITIALIZATION, payload: {initialized}});
+export const setWarning = (responseWarning: string) => ({type: SET_SERVER_RESPONSE, payload: {responseWarning}});
+export const setTimerId = (timerId: number | null) => ({type: SET_TIMER_ID, payload: {timerId}});
+
+export const initializeApp = () => async (dispatch: Function) => {
     await dispatch(queryAuth());
     await dispatch(setInitialization(true));
 
 }
 
-export const setResponseWarning = responseWarning => (dispatch, getState) => {
+export const setResponseWarning = (responseWarning: string) => (dispatch: Function, getState: Function) => {
 
     const id = getState().app.timerId;
 
     if (responseWarning && !getState().app.timerId) {
         dispatch(setWarning(responseWarning));
-        dispatch(setTimerId(setTimeout(() => {
+        dispatch(setTimerId(+(setTimeout(() => {
             dispatch(setWarning(''));
             clearTimeout(id);
             dispatch(setTimerId(null));
-        }, 4000)));
+        }, 4000))));
     } else if (!responseWarning && getState().app.timerId) {
         dispatch(setWarning(responseWarning));
         clearTimeout(id);

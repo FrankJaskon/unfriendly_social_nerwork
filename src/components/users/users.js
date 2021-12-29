@@ -20,6 +20,19 @@ const Users = ({clearUserPage, showUsers, toggleSubscription, isAuth,
     authId, usersList, usersNumber, totalPagesNumber, currentPage,
     isFetching, usersFollowingInProgress}) => {
 
+    // const dispatch = useDispatch();
+
+    // const necessaryState = useSelector(({auth: {id : authId, isAuth}, users: {usersList, usersNumber, totalPagesNumber,
+    //     currentPage, isFetching, usersFollowingInProgress}}) => ({isAuth, authId, usersList, usersNumber, totalPagesNumber,
+    //         currentPage, isFetching, usersFollowingInProgress}));
+
+    // const selectorChecking = useSelector(state => state);
+
+    // console.log(selectorChecking);
+    // console.log(necessaryState);
+
+    // console.log('Hello');
+
     const showPrevPage = () => {
         showUsers(currentPage - 1);
     }
